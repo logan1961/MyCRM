@@ -11,7 +11,7 @@
 	<context:component-scan base-package="com.me.crm.controller"/>
 	
 	<!-- 注解驱动 -->
-	<!-- <mvc:annotation-driven conversion-service="consersionServiceFactoryBean"/> -->  <!-- 日期格式转换的驱动  -->
+	<mvc:annotation-driven conversion-service="consersionServiceFactoryBean"/>  <!-- 日期格式转换的驱动  -->
 	
 	<!-- 视图解析器
 		如果Controller中书写的是视图的逻辑名，这个视图解析器必须要配置。
@@ -36,14 +36,14 @@
 	
 	<!-- SpringMVC日期处理 -->
 	<!-- 配置Converter转换器 转换工厂 -->
-	<!-- <bean id="consersionServiceFactoryBean" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-	    配置多个转换器 
+	<bean id="consersionServiceFactoryBean" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	    <!-- 配置多个转换器 --> 
 	    <property name="converters">
 	        <list>
 	           <bean class="com.me.crm.conversion.DateConverter"/>
 	        </list>
 	    </property>
-	</bean> -->
+	</bean>
 	
 	<!--配置拦截器-->
     <!-- <mvc:interceptors>

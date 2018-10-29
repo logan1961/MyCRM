@@ -1,5 +1,7 @@
 package com.me.crm.mapper;
 
+import java.util.List;
+
 import com.me.crm.entity.User;
 
 public interface UserMapper {
@@ -50,4 +52,8 @@ public interface UserMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(User record);
+
+	List<User> pageList(User user);
+
+	int deleteAll(String[] idArray);
 }

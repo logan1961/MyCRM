@@ -1,5 +1,7 @@
 package com.me.crm.mapper;
 
+import java.util.List;
+
 import com.me.crm.entity.Permission;
 
 public interface PermissionMapper {
@@ -50,4 +52,8 @@ public interface PermissionMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Permission record);
+
+	Permission selectByResource(String resource);
+
+	List<Permission> selectByUserId(Integer id);
 }

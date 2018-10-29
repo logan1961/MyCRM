@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/common/taglibs.jsp" %>
+<%@taglib uri="http://me.com/rbac" prefix="myFn"  %>
 <!DOCTYPE html>
 <html>
 
@@ -56,19 +57,19 @@
                         </a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/getHomePage.action">
+                        <a class="J_menuItem" href="${ctx}/getProductPage.action">
                             <i class="fa fa-desktop"></i>
                             <span class="nav-label">商品管理</span>
                         </a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/getHomePage.action">
+                        <a class="J_menuItem" href="${ctx}/getSaleChancePage.action">
                             <i class="fa fa-desktop"></i>
                             <span class="nav-label">营销管理</span>
                         </a>
                     </li>
                     <li>
-                        <a class="J_menuItem" href="${ctx}/getHomePage.action">
+                        <a class="J_menuItem" href="${ctx}/getOrderPage.action">
                             <i class="fa fa-desktop"></i>
                             <span class="nav-label">订单管理</span>
                         </a>
@@ -86,9 +87,6 @@
                             <li>
                                 <a class="J_menuItem" href="${ctx}/user/getUserPage.action">角色管理</a>
                             <li>
-                            <li>
-                                <a class="J_menuItem" href="${ctx}/shipping/getShippingPage.action">权限管理</a>
-                            </li>
                         </ul>
                     </li>
                     <li>
@@ -99,10 +97,10 @@
                         </a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a class="J_menuItem" href="${ctx}/product/getProductsPage.action">用户管理</a>
+                                <a class="J_menuItem" href="${ctx}/user/getUserPage.action">用户管理</a>
                             </li>
                             <li>
-                                <a class="J_menuItem" href="${ctx}/user/getUserPage.action">角色管理</a>
+                                <a class="J_menuItem" href="${ctx}/role/getRolePage.action">角色管理</a>
                             <li>
                             <li>
                                 <a class="J_menuItem" href="${ctx}/shipping/getShippingPage.action">权限管理</a>

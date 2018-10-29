@@ -159,4 +159,26 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 自定义SQL -->
+  <!-- 分页展示 -->
+  <select id="pageList" parameterType="User" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from user
+  	<where>
+  		<if test="name!=null and name!='' ">
+  			and name like '%${name}%'
+  		</if>
+  	</where>
+  </select>
+  
+  <!-- 删除全部 -->
+  <delete id="deleteAll">
+  	delete from user
+  	where id in
+  	<foreach collection="array" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  </delete>
 </mapper>
