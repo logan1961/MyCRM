@@ -44,7 +44,7 @@
 		 <img src="{{d.fullUrl}}"/>
 	</script>
 	
-	<script src="${ctx}/static/back/js/jquery.min.js"></script>
+	<script src="${ctx}/static/back/js/jquery.min.js?v=2.1.4"></script>
 	<script src="${ctx}/static/common/mylayer.js"></script>
 	<script src="${ctx}/static/common/util.js"></script>
 	<script src="${ctx}/static/lib/layui/layui.js"></script>
@@ -60,17 +60,14 @@
 			
 			table.render({
 			    elem: '#tableId'
-			    ,url: '${ctx}/user/pageList.action' //数据接口
+			    ,url: '${ctx}/permission/pageList.action' //数据接口
 			    ,page: true //开启分页
 			    ,id : "layUITableId" //设定容器唯一ID，id值是对表格的数据操作方法上是必要的传递条件，它是表格容器的索引
 			    ,cols: [[ //表头
 			      {type: 'checkbox', fixed: 'left'}
-			      ,{field: 'id', title: 'ID', sort: true, fixed: 'left'}
+			      ,{field: 'id', title: 'ID',  sort: true, fixed: 'left'}
 			      ,{field: 'name', title: '用户名', sort: true, fixed: 'left'}
-			      ,{field: 'password', title: '密码', sort: true, fixed: 'left'}
-			      ,{field: 'trueName', title: '真实姓名', sort: true, fixed: 'left'}
-			      ,{field: 'email', title: '邮箱', sort: true, fixed: 'left'}
-			      ,{field: 'phone', title: '电话', sort: true, fixed: 'left'}
+			      ,{field: 'resource', title: '资源', sort: true, fixed: 'left'}
 			      ,{field: 'createTime', title: '创建时间', sort: true}
 			      ,{field: 'updateTime', title: '更新时间', sort: true}
 			      ,{fixed:'right', width: 178, toolbar:'#barDemo'}
@@ -87,7 +84,7 @@
 		    } else if(layEvent === 'del'){
 		      layer.confirm('真的删除行么', function(index){
 		    	$.ajax({
-		    		url:"${ctx}/user/deleteById.action",
+		    		url:"${ctx}/permission/deleteById.action",
 		    		data:{"id":data.id},
 		    		dataType:"json",
 		    		success:function(resp) {
@@ -102,9 +99,7 @@
 		    	});
 		      });
 		    } else if(obj.event === 'edit'){
-		        layer.alert('编辑行：<br>'+ JSON.stringify(data))
-		        console.log(data);
-		    	location.href = "${ctx}/user/getUpdatePage.action?userId="+data.id;
+		      layer.alert('编辑行：<br>'+ JSON.stringify(data))
 		    }
 		  });
 		  
@@ -119,7 +114,7 @@
 		       console.log(ids);
 		       layer.confirm('真的删除行么', function(index){
 			    	$.ajax({
-			    		url:"${ctx}/user/deleteAll.action",
+			    		url:"${ctx}/permission/deleteAll.action",
 			    		data:{"ids":ids},
 			    		dataType:"json",
 			    		success:function(resp) {
@@ -149,7 +144,7 @@
 			},
 			//添加
 			add : function() {
-				location.href = "${ctx}/user/getAddPage.action";
+				location.href = "${ctx}/permission/getAddPage.action";
 			}
 		  };
 		  

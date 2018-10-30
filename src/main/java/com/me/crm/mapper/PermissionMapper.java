@@ -56,4 +56,8 @@ public interface PermissionMapper {
 	Permission selectByResource(String resource);
 
 	List<Permission> selectByUserId(Integer id);
+
+	List<Permission> pageList(Permission permission);
+
+	int deleteAll(String[] idArray);
 }

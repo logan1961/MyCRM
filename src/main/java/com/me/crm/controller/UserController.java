@@ -17,6 +17,10 @@ public class UserController {
 	@Autowired
 	private IUserService userService;
 	
+	/**
+	 * 获取用户信息界面
+	 * @return
+	 */
 	@RequestMapping("/getUserPage")
 	public String getUserPage(){
 		return "/user/user_list";
@@ -33,9 +37,9 @@ public class UserController {
 	@RequestMapping(value="/pageList")
 	@ResponseBody
 	public ServerResponse pageList(Integer page,Integer limit,User user,Date time){
-		System.out.println(time);
+		System.out.println("这个时间是：" + time);
 		ServerResponse serverResponse = userService.pageList(page,limit,user);
-		System.out.println(serverResponse);
+		System.out.println("这个serverResponse是：" + serverResponse);
 		return serverResponse;
 	}
 	

@@ -145,4 +145,26 @@
 	  where user_id = #{userId}
     ))
   </select>
+  
+  <!-- 自定义SQL部分 -->
+  <!-- 分页展示 -->
+   <select id="pageList" parameterType="Permission" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from permission 
+    <where>
+    	<if test="name!=null and name!='' ">
+    		and name like '%${name}%'
+    	</if>
+    </where>
+  </select>
+  
+  <!-- 删除全部 -->
+  <delete id="deleteAll">
+  	delete from permission
+  	where id in
+  	<foreach collection="array" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  </delete>
 </mapper>

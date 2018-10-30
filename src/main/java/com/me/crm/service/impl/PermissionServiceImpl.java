@@ -8,51 +8,37 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.me.crm.common.ServerResponse;
-import com.me.crm.entity.User;
-import com.me.crm.mapper.UserMapper;
-import com.me.crm.service.IUserService;
+import com.me.crm.entity.Permission;
+import com.me.crm.mapper.PermissionMapper;
+import com.me.crm.service.IPermissionService;
 
 @Service
-public class UserServiceImpl implements IUserService {
+public class PermissionServiceImpl implements IPermissionService {
 	@Autowired
-	private UserMapper userMapper;
+	private PermissionMapper permissionMapper;
 	
-	/**
-	 * 分页展示
-	 */
 	@Override
-	public ServerResponse pageList(Integer page, Integer limit, User user) {
+	public ServerResponse pageList(Integer page, Integer limit, Permission permission) {
 		//1、使用PageHelper插件设置分页
 		PageHelper.startPage(page, limit);
 		//2、执行查询
-		List<User> list = userMapper.pageList(user);
+		List<Permission> list = permissionMapper.pageList(permission);
 		//3、使用PageInfo对结果进行包装
 		PageInfo pageInfo = new PageInfo(list);
-		Integer count = (int) pageInfo.getTotal();
-		return ServerResponse.createSuccess("查询成功",count,list);
-	}
-
-	@Override
-	public ServerResponse add(User user) {
-		try {
-			int count = userMapper.insert(user);
-			if (count == 1) {
-				return ServerResponse.createSuccess("添加成功");
-			} else {
-				return ServerResponse.createError("添加失败");
-			}
-		} catch (Exception e) {
-			return ServerResponse.createError("删除失败");
-		}
+		Integer count = (int) pageInfo.getTotal();//得到总数量
+		
+		return ServerResponse.createSuccess("查询成功", count, list);
 	}
 
 	@Override
 	public ServerResponse deleteById(Integer id) {
 		try {
-			int count = userMapper.deleteByPrimaryKey(id);
+			int count = permissionMapper.deleteByPrimaryKey(id);
 			if (count == 1) {
+				System.out.println("删除成功");
 				return ServerResponse.createSuccess("删除成功");
 			} else {
+				System.out.println("删除失败");
 				return ServerResponse.createError("删除失败");
 			}
 		} catch (Exception e) {
@@ -63,11 +49,25 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public ServerResponse deleteAll(String ids) {
 		String[] idArray = ids.split(",");
-		int count = userMapper.deleteAll(idArray);
+		int count = permissionMapper.deleteAll(idArray);
 		if (count == idArray.length) {
 			return ServerResponse.createSuccess("删除成功");
 		} else {
 			return ServerResponse.createError("删除失败");
+		}
+	}
+
+	@Override
+	public ServerResponse add(Permission permission) {
+		try {
+			int count = permissionMapper.insert(permission);
+			if (count == 1) {
+				return ServerResponse.createSuccess("添加成功");
+			} else {
+				return ServerResponse.createError("添加失败");
+			}
+		} catch (Exception e) {
+			return ServerResponse.createError("添加失败");
 		}
 	}
 
