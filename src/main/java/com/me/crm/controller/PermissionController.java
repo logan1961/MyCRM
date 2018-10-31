@@ -74,5 +74,13 @@ public class PermissionController {
 		return "/permission/permission_add";
 	}
 	
-	
+	/**
+	 * 查找所有权限
+	 * @return
+	 */
+	@RequestMapping("/selectAllPermisssions")
+	@ResponseBody
+	public ServerResponse selectAllPermisssions() {
+		return permissionService.selectAllPermisssions();
+	}
 }

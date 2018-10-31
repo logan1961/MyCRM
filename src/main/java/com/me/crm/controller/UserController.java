@@ -38,6 +38,8 @@ public class UserController {
 	@ResponseBody
 	public ServerResponse pageList(Integer page,Integer limit,User user,Date time){
 		System.out.println("这个时间是：" + time);
+		System.out.println("page是吾问无为谓无无无" + page);
+		System.out.println("甲方单位" + limit);
 		ServerResponse serverResponse = userService.pageList(page,limit,user);
 		System.out.println("这个serverResponse是：" + serverResponse);
 		return serverResponse;

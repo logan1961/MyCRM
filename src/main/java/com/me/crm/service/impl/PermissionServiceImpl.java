@@ -1,5 +1,6 @@
 package com.me.crm.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import com.me.crm.common.ServerResponse;
 import com.me.crm.entity.Permission;
 import com.me.crm.mapper.PermissionMapper;
 import com.me.crm.service.IPermissionService;
+import com.me.crm.vo.LayUISelectMVO;
 
 @Service
 public class PermissionServiceImpl implements IPermissionService {
@@ -69,6 +71,20 @@ public class PermissionServiceImpl implements IPermissionService {
 		} catch (Exception e) {
 			return ServerResponse.createError("添加失败");
 		}
+	}
+
+	@Override
+	public ServerResponse selectAllPermisssions() {
+		List<Permission> permissions = permissionMapper.pageList(new Permission());
+		List<LayUISelectMVO> list = new ArrayList<>();
+		for (Permission permission : permissions) {
+			LayUISelectMVO layUISelectMVO = new LayUISelectMVO();
+			layUISelectMVO.setId(permission.getId());
+			layUISelectMVO.setName(permission.getName());
+			layUISelectMVO.setStatus(1);
+			list.add(layUISelectMVO);
+		}
+		return ServerResponse.createSuccess("查询所有权限成功",list);
 	}
 
 }

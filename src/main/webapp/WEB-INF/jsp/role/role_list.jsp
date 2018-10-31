@@ -60,15 +60,15 @@
 			
 			table.render({
 			    elem: '#tableId'
-			    ,url: '${ctx}/permission/pageList.action' //数据接口
+			    ,url: '${ctx}/role/pageList.action' //数据接口
 			    ,page: true //开启分页
 			    ,id : "layUITableId" //设定容器唯一ID，id值是对表格的数据操作方法上是必要的传递条件，它是表格容器的索引
 			    ,cols: [[ //表头
 			      {type: 'checkbox', fixed: 'left'}
-			      ,{field: 'id', title: 'ID',  sort: true, fixed: 'left'}
-			      ,{field: 'name', title: '用户名', sort: true, fixed: 'left'}
-			      ,{field: 'resource', title: '资源', sort: true, fixed: 'left'}
-			      ,{field: 'createTime', title: '创建时间', sort: true}
+			      ,{field: 'id', title: 'ID', sort: true, fixed: 'left'}
+			      ,{field: 'name', title: '角色名',  sort: true, fixed: 'left'}
+			      ,{field: 'sn', title: '角色编号',  sort: true, fixed: 'left'}
+			      ,{field: 'createTime', title: '创建时间',  sort: true}
 			      ,{field: 'updateTime', title: '更新时间', sort: true}
 			      ,{fixed:'right', width: 178, toolbar:'#barDemo'}
 			    ]]
@@ -84,7 +84,7 @@
 		    } else if(layEvent === 'del'){
 		      layer.confirm('真的删除行么', function(index){
 		    	$.ajax({
-		    		url:"${ctx}/permission/deleteById.action",
+		    		url:"${ctx}/role/deleteById.action",
 		    		data:{"id":data.id},
 		    		dataType:"json",
 		    		success:function(resp) {
@@ -99,7 +99,8 @@
 		    	});
 		      });
 		    } else if(obj.event === 'edit'){
-		      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+		       //layer.alert('编辑行：<br>'+ JSON.stringify(data))
+		       location.href = "${ctx}/role/getUpdatePage.action?roleId="+data.id;
 		    }
 		  });
 		  
@@ -114,7 +115,7 @@
 		       console.log(ids);
 		       layer.confirm('真的删除行么', function(index){
 			    	$.ajax({
-			    		url:"${ctx}/permission/deleteAll.action",
+			    		url:"${ctx}/role/deleteAll.action",
 			    		data:{"ids":ids},
 			    		dataType:"json",
 			    		success:function(resp) {
@@ -144,7 +145,7 @@
 			},
 			//添加
 			add : function() {
-				location.href = "${ctx}/permission/getAddPage.action";
+				location.href = "${ctx}/role/getAddPage.action";
 			}
 		  };
 		  

@@ -13,4 +13,6 @@ public interface IPermissionService {
 
 	ServerResponse add(Permission permission);
 
+	ServerResponse selectAllPermisssions();
+
 }

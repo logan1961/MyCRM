@@ -1,5 +1,7 @@
 package com.me.crm.mapper;
 
+import java.util.List;
+
 import com.me.crm.entity.Role;
 
 public interface RoleMapper {
@@ -50,4 +52,8 @@ public interface RoleMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Role record);
+
+	List<Role> pageList(Role role);
+
+	int deleteAll(String[] idArray);
 }
