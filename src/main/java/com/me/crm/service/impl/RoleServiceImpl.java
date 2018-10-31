@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.me.crm.common.ServerResponse;
 import com.me.crm.entity.Role;
+import com.me.crm.entity.RolePermission;
 import com.me.crm.entity.RolePermissionKey;
 import com.me.crm.mapper.RoleMapper;
 import com.me.crm.mapper.RolePermissionMapper;
@@ -54,8 +55,11 @@ public class RoleServiceImpl implements IRoleService {
 			// 将角色-权限多对多关系放到角色-权限表中
 			String[] permissionIds = permissions.split(",");
 			for (String permissionId : permissionIds) {
-				RolePermissionKey rolePermissionKey = new RolePermissionKey(role.getId(), Integer.parseInt(permissionId));
-				rolePermissionMapper.insert(rolePermissionKey);
+				System.out.println("role的id:" + role.getId());
+				RolePermission rolePermission = new RolePermission(role.getId(), Integer.parseInt(permissionId));
+				System.out.println("打印一下rolePermission:" + rolePermission);
+				System.out.println("测试下permissionId:" + permissionId);
+				rolePermissionMapper.insert(rolePermission);
 			}
 			return ServerResponse.createSuccess();
 		} catch (Exception e) {

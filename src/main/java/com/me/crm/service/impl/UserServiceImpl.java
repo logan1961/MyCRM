@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.me.crm.common.ServerResponse;
+import com.me.crm.entity.Role;
 import com.me.crm.entity.User;
+import com.me.crm.mapper.RoleMapper;
 import com.me.crm.mapper.UserMapper;
 import com.me.crm.service.IUserService;
 
@@ -16,6 +18,8 @@ import com.me.crm.service.IUserService;
 public class UserServiceImpl implements IUserService {
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private RoleMapper roleMapper;
 	
 	/**
 	 * 分页展示
@@ -69,6 +73,12 @@ public class UserServiceImpl implements IUserService {
 		} else {
 			return ServerResponse.createError("删除失败");
 		}
+	}
+
+	@Override
+	public ServerResponse selectAllRoles() {
+		List<Role> roles = roleMapper.pageList(new Role());
+		return null;
 	}
 
 }

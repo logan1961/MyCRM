@@ -67,4 +67,9 @@ public class UserController {
 	public ServerResponse add(User user){
 		return userService.add(user);
 	}
+	
+	@RequestMapping("/selectAllRoles")
+	public ServerResponse selectAllRoles(){
+		return userService.selectAllRoles();
+	}
 }

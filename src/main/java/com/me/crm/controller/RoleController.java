@@ -29,7 +29,6 @@ public class RoleController {
 		return "/role/role_list";
 	}
 	
-	
 	@RequestMapping("/pageList")
 	@ResponseBody
 	public ServerResponse pageList(Integer page, Integer limit, Role role, Date time) {
@@ -58,8 +57,8 @@ public class RoleController {
 	@RequestMapping("/add")
 	@ResponseBody
 	public ServerResponse add(Role role, String permissions, HttpSession session) {
-		System.out.println(role);
-		System.out.println(permissions);
+		System.out.println("role是这个:" + role);
+		System.out.println("permission是这个:" + permissions);
 		User user = (User) session.getAttribute("user");
 		return roleService.add(role, permissions);
 	}
