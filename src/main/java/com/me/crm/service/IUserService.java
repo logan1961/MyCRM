@@ -9,10 +9,12 @@ public interface IUserService {
 
 	ServerResponse deleteById(Integer id);
 
-	ServerResponse add(User user);
+	ServerResponse add(User user, String roles);
 
 	ServerResponse deleteAll(String ids);
 
-	ServerResponse selectAllRoles();
+	ServerResponse update(User user, String roles);
+
+	ServerResponse selectUserAndRoles(Integer userId);
 
 }

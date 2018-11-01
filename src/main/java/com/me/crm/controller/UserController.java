@@ -38,7 +38,7 @@ public class UserController {
 	@ResponseBody
 	public ServerResponse pageList(Integer page,Integer limit,User user,Date time){
 		System.out.println("这个时间是：" + time);
-		System.out.println("page是吾问无为谓无无无" + page);
+		System.out.println("page测试" + page);
 		System.out.println("甲方单位" + limit);
 		ServerResponse serverResponse = userService.pageList(page,limit,user);
 		System.out.println("这个serverResponse是：" + serverResponse);
@@ -64,12 +64,20 @@ public class UserController {
 	
 	@RequestMapping("/add")
 	@ResponseBody
-	public ServerResponse add(User user){
-		return userService.add(user);
+	public ServerResponse add(User user,String roles){
+		return userService.add(user,roles);
 	}
 	
-	@RequestMapping("/selectAllRoles")
-	public ServerResponse selectAllRoles(){
-		return userService.selectAllRoles();
+	@RequestMapping("/selectUserAndRoles")
+	public ServerResponse selectAllRoles(Integer userId){
+		return userService.selectUserAndRoles(userId);
+	}
+	
+	@RequestMapping("/update")
+	@ResponseBody
+	public ServerResponse update(User user, String roles) {
+		System.out.println(user);
+		System.out.println(roles);
+		return userService.update(user, roles);
 	}
 }

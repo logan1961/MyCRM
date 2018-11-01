@@ -113,4 +113,10 @@
     where role_id = #{roleId,jdbcType=INTEGER}
       and permission_id = #{permissionId,jdbcType=INTEGER}
   </update>
+  
+  <!-- 自定义SQL语句 -->
+  <delete id="deleteByRoleId" parameterType="int">
+  	delete from role_permission
+  	where role_id=#{id}
+  </delete>
 </mapper>

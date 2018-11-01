@@ -13,4 +13,10 @@ public interface IRoleService {
 
 	ServerResponse pageList(Integer page, Integer limit, Role role);
 
+	ServerResponse update(Role role, String permissions);
+
+	ServerResponse selectRoleAndPermissions(Integer roleId);
+
+	ServerResponse selectAllRoles();
+
 }

@@ -60,4 +60,6 @@ public interface PermissionMapper {
 	List<Permission> pageList(Permission permission);
 
 	int deleteAll(String[] idArray);
+
+	List<Permission> selectPermissionsByRoleId(Integer roleId);
 }

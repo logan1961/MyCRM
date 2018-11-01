@@ -167,4 +167,13 @@
   		#{id}
   	</foreach>
   </delete>
+  
+  <!-- 根据角色id查找权限 -->
+  <select id="selectPermissionsByRoleId" parameterType="int" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from permission
+    where id in
+    (select permission_id from role_permission where role_id = #{roleId})
+  </select>
 </mapper>

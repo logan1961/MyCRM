@@ -56,4 +56,6 @@ public interface RoleMapper {
 	List<Role> pageList(Role role);
 
 	int deleteAll(String[] idArray);
+
+	List<Role> selectRoleByUserId(Integer userId);
 }

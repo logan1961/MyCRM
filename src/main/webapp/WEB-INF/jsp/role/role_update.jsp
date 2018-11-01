@@ -56,7 +56,7 @@
 		  	var selectM = layui.selectM;
 		  	
 		  	$.ajax({
-				url : '${ctx}/role/selectRoleAndPermisssions.action',
+				url : '${ctx}/role/selectRoleAndPermissions.action',
 				type : 'POST',
 				data : {"roleId" : "${param.roleId}"},
 				dataType : 'json',

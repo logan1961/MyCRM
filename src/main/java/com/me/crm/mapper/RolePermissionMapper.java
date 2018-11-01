@@ -51,4 +51,6 @@ public interface RolePermissionMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(RolePermission record);
+
+	void deleteByRoleId(Integer id);
 }

@@ -120,8 +120,8 @@
     update role
     set name = #{name,jdbcType=VARCHAR},
       sn = #{sn,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      create_time = now(),
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
   
@@ -138,7 +138,7 @@
     </where>
   </select>
   
-  <!--  -->
+  <!-- 批量删除 -->
   <delete id="deleteAll">
   	delete from role
   	where id in
@@ -146,4 +146,13 @@
   		#{id}
   	</foreach>
   </delete>
+  
+  <!-- 根据userId查找角色 -->
+  <select id="selectRolesByUserId" parameterType="int" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from role 
+  	where id in 
+  	(select role_id from user_role where user_id=#{id})
+  </select>
 </mapper>
