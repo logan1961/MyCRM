@@ -1,5 +1,7 @@
 package com.me.crm.service;
 
+import javax.servlet.http.HttpSession;
+
 import com.me.crm.common.ServerResponse;
 import com.me.crm.entity.User;
 
@@ -16,5 +18,7 @@ public interface IUserService {
 	ServerResponse update(User user, String roles);
 
 	ServerResponse selectUserAndRoles(Integer userId);
+
+	ServerResponse login(String name, String password, HttpSession session);
 
 }

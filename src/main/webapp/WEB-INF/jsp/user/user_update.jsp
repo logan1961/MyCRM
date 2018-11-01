@@ -16,34 +16,35 @@
 <body>
   	<div class="main_div">
 		<form id="form_add" onsubmit="return false" class="layui-form layui-form-pane" action="">
+		  <input type="hidden" id="id" name="id"/>
 		  <div class="layui-form-item">
 		    <label class="layui-form-label">用户名</label>
 		    <div class="layui-input-block">
-		      <input type="text" name="name" autocomplete="off" placeholder="请输入标题" class="layui-input">
+		      <input type="text" id="name" name="name" autocomplete="off" placeholder="请输入标题" class="layui-input">
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
 		    <label class="layui-form-label">密码</label>
 		    <div class="layui-input-block">
-		      <input type="text" name="password" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+		      <input type="text" id="password" name="password" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
 		    <label class="layui-form-label">真实姓名</label>
 		    <div class="layui-input-block">
-		      <input type="text" name="trueName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+		      <input type="text" id="trueName" name="trueName" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
 		    <label class="layui-form-label">邮箱</label>
 		    <div class="layui-input-block">
-		      <input type="text" name="email" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+		      <input type="text" id="email" name="email" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
 		    <label class="layui-form-label">电话</label>
 		    <div class="layui-input-block">
-		      <input type="text" name="phone" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+		      <input type="text" id="phone" name="phone" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
@@ -72,21 +73,32 @@
 		  	var selectM = layui.selectM;
 		  	
 		  	$.ajax({
-				url : '${ctx}/role/selectAllRoles.action',
+				url : '${ctx}/user/selectUserAndRoles.action',
 				type : 'POST',
+				data : {"userId" : "${param.userId}"},
 				dataType : 'json',
 				success : function(resp) {
 					if(resp.code == util.SUCCESS) {
 						mylayer.success(resp.msg);
+						var user = resp.data["user"];
+						var allRoles = resp.data["allRoles"];
+						var selectIds = resp.data["selectIds"];
+						$("#id").val(user.id);
+						$("#name").val(user.name);
+						$("#trueName").val(user.trueName);
+						$("#email").val(user.email);
+						$("#phone").val(user.phone);
+						$("#password").val(user.password);
+						
 						 //多选标签-基本配置
 					    var tagIns = selectM({
 					      //元素容器【必填】
 					      elem: '#roles'
 					      //候选数据【必填】
-					      ,data: resp.data
+					      ,data: allRoles
 					      //默认值
-					      /* ,selected: [1,2] */
-					      // 默认最多选中5个
+					      ,selected: selectIds
+					   	  // 默认最多选中5个
 					      ,max : 100
 					    });
 					} else {
@@ -99,7 +111,7 @@
 		//ajax方式提交form表单
 		function submitForm(){
 			$.ajax({
-				url : '${ctx}/user/add.action',
+				url : '${ctx}/user/update.action',
 				data : $('#form_add').serialize(),
 				type : 'POST',
 				dataType : 'json',

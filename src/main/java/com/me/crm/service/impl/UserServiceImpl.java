@@ -5,19 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.me.crm.common.ServerResponse;
+import com.me.crm.entity.Permission;
 import com.me.crm.entity.Role;
 import com.me.crm.entity.User;
 import com.me.crm.entity.UserRole;
+import com.me.crm.mapper.PermissionMapper;
 import com.me.crm.mapper.RoleMapper;
 import com.me.crm.mapper.UserMapper;
 import com.me.crm.mapper.UserRoleMapper;
 import com.me.crm.service.IUserService;
+import com.me.crm.util.UserContext;
 import com.me.crm.vo.LayUISelectMVO;
 
 @Service
@@ -28,6 +33,8 @@ public class UserServiceImpl implements IUserService {
 	private RoleMapper roleMapper;
 	@Autowired
 	private UserRoleMapper userRoleMapper;
+	@Autowired
+	private PermissionMapper permissionMapper;
 	
 	/**
 	 * 分页展示
@@ -131,6 +138,24 @@ public class UserServiceImpl implements IUserService {
 		map.put("selectIds", selectedRoleIds);
 		
 		return ServerResponse.createSuccess("成功",map);
+	}
+
+	/**
+	 * 登录
+	 */
+	@Override
+	public ServerResponse login(String name, String password, HttpSession session) {
+		UserContext.session = session;
+		User user = userMapper.login(name,password);
+		if (user != null) {
+			//将当前用户放到session中
+			session.setAttribute(UserContext.USER_IN_SESSION, user);
+			//查询该用户拥有的权限，放到session中
+			List<Permission> permissions = permissionMapper.selectPermissionsByRoleId(user.getId());
+			session.setAttribute(UserContext.PERMISSION_IN_SESSION, permissions);
+			return ServerResponse.createSuccess("登陆成功");
+		}
+		return ServerResponse.createError("登录失败");
 	}
 
 }

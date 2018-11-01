@@ -2,6 +2,8 @@ package com.me.crm.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.me.crm.entity.User;
 
 public interface UserMapper {
@@ -56,4 +58,6 @@ public interface UserMapper {
 	List<User> pageList(User user);
 
 	int deleteAll(String[] idArray);
+
+	User login(@Param("name")String name, @Param("password")String password);
 }

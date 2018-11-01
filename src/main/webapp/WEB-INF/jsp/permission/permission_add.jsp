@@ -58,7 +58,7 @@
 				success : function(resp) {
 					if(resp.code == util.SUCCESS) {
 						//mylayer.success(jsonObj.msg);
-						mylayer.confirm("添加成功，是够跳转到商品列表界面？", "${ctx}/permission/getPermissionPage.action");
+						mylayer.confirm("添加成功，是够跳转到权限列表界面？", "${ctx}/permission/getPermissionPage.action");
 					} else {
 						mylayer.errorMsg(resp.msg);
 					}

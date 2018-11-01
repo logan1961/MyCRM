@@ -148,7 +148,7 @@
   </delete>
   
   <!-- 根据userId查找角色 -->
-  <select id="selectRolesByUserId" parameterType="int" resultMap="BaseResultMap">
+  <select id="selectRoleByUserId" parameterType="int" resultMap="BaseResultMap">
   	select 
     <include refid="Base_Column_List" />
     from role 

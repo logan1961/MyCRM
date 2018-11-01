@@ -66,7 +66,7 @@
 			    ,cols: [[ //表头
 			      {type: 'checkbox', fixed: 'left'}
 			      ,{field: 'id', title: 'ID',  sort: true, fixed: 'left'}
-			      ,{field: 'name', title: '用户名', sort: true, fixed: 'left'}
+			      ,{field: 'name', title: '权限名称', sort: true, fixed: 'left'}
 			      ,{field: 'resource', title: '资源', sort: true, fixed: 'left'}
 			      ,{field: 'createTime', title: '创建时间', sort: true}
 			      ,{field: 'updateTime', title: '更新时间', sort: true}

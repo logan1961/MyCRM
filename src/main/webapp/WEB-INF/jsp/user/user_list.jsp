@@ -103,7 +103,6 @@
 		      });
 		    } else if(obj.event === 'edit'){
 		        layer.alert('编辑行：<br>'+ JSON.stringify(data))
-		        console.log(data);
 		    	location.href = "${ctx}/user/getUpdatePage.action?userId="+data.id;
 		    }
 		  });

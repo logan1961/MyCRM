@@ -181,4 +181,11 @@
   		#{id}
   	</foreach>
   </delete>
+  
+  <!-- 登录 -->
+  <select id="login" resultMap="BaseResultMap">
+  	select <include refid="Base_Column_List"/>
+  	from user
+  	where name = #{name} and password = #{password}
+  </select>
 </mapper>

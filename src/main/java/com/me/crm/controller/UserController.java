@@ -2,6 +2,8 @@ package com.me.crm.controller;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,8 +71,14 @@ public class UserController {
 	}
 	
 	@RequestMapping("/selectUserAndRoles")
+	@ResponseBody
 	public ServerResponse selectAllRoles(Integer userId){
 		return userService.selectUserAndRoles(userId);
+	}
+	
+	@RequestMapping("/getUpdatePage")
+	public String getUpdatePage(){
+		return "/user/user_update";
 	}
 	
 	@RequestMapping("/update")
@@ -79,5 +87,23 @@ public class UserController {
 		System.out.println(user);
 		System.out.println(roles);
 		return userService.update(user, roles);
+	}
+	
+	@RequestMapping("/getLoginPage")
+	public String getLoginPage(){
+		return "/user/login";
+	}
+	
+	/**
+	 * 登录
+	 * @param name
+	 * @param password
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/login")
+	@ResponseBody
+	public ServerResponse login(String name,String password,HttpSession session){
+		return userService.login(name,password,session);
 	}
 }
