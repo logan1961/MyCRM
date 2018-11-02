@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="demoTable">
-	    名字：
+	    产品名称：
 	  <div class="layui-inline">
 		  <input class="layui-input" id="searchName" />
 	  </div>
@@ -41,7 +41,7 @@
 		 {{#  }					  }}
 	</script>
 	<script type="text/html" id="mainImageTpl">
-		 <img src="{{d.fullUrl}}"/>
+		 <img src="/pic/{{d.image}}"/>
 	</script>
 	
 	<script src="${ctx}/static/back/js/jquery.min.js"></script>
@@ -60,17 +60,17 @@
 			
 			table.render({
 			    elem: '#tableId'
-			    ,url: '${ctx}/user/pageList.action' //数据接口
+			    ,url: '${ctx}/product/pageList.action' //数据接口
 			    ,page: true //开启分页
 			    ,id : "layUITableId" //设定容器唯一ID，id值是对表格的数据操作方法上是必要的传递条件，它是表格容器的索引
 			    ,cols: [[ //表头
 			      {type: 'checkbox', fixed: 'left'}
 			      ,{field: 'id', title: 'ID', sort: true, fixed: 'left'}
-			      ,{field: 'name', title: '用户名', sort: true, fixed: 'left'}
-			      ,{field: 'password', title: '密码', sort: true, fixed: 'left'}
-			      ,{field: 'trueName', title: '真实姓名', sort: true, fixed: 'left'}
-			      ,{field: 'email', title: '邮箱', sort: true, fixed: 'left'}
-			      ,{field: 'phone', title: '电话', sort: true, fixed: 'left'}
+			      ,{field: 'name', title: '产品名称', sort: true, fixed: 'left'}
+			      ,{field: 'image', title: '图片', sort: true, fixed: 'left',templet:"#mainImageTpl"}
+			      ,{field: 'price', title: '价格', sort: true, fixed: 'left'}
+			      ,{field: 'stock', title: '库存', sort: true, fixed: 'left'}
+			      ,{field: 'detail', title: '详情', sort: true, fixed: 'left'}
 			      ,{field: 'createTime', title: '创建时间', sort: true}
 			      ,{field: 'updateTime', title: '更新时间', sort: true}
 			      ,{fixed:'right', width: 178, toolbar:'#barDemo'}
@@ -102,7 +102,7 @@
 		    	});
 		      });
 		    } else if(obj.event === 'edit'){
-		    	location.href = "${ctx}/user/getUpdatePage.action?userId="+data.id;
+		    	location.href = "${ctx}/product/getUpdatePage.action?userId="+data.id;
 		    }
 		  });
 		  
@@ -117,7 +117,7 @@
 		       console.log(ids);
 		       layer.confirm('真的删除行么', function(index){
 			    	$.ajax({
-			    		url:"${ctx}/user/deleteAll.action",
+			    		url:"${ctx}/product/deleteAll.action",
 			    		data:{"ids":ids},
 			    		dataType:"json",
 			    		success:function(resp) {
@@ -147,7 +147,7 @@
 			},
 			//添加
 			add : function() {
-				location.href = "${ctx}/user/getAddPage.action";
+				location.href = "${ctx}/product/getAddPage.action";
 			}
 		  };
 		  

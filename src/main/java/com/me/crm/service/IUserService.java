@@ -1,5 +1,7 @@
 package com.me.crm.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import com.me.crm.common.ServerResponse;
@@ -20,5 +22,7 @@ public interface IUserService {
 	ServerResponse selectUserAndRoles(Integer userId);
 
 	ServerResponse login(String name, String password, HttpSession session);
+
+	List<User> selectXiaoShouUser();
 
 }

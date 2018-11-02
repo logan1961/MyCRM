@@ -53,7 +53,7 @@
       create_time, update_time)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
       #{unit,jdbcType=VARCHAR}, #{price,jdbcType=REAL}, #{stock,jdbcType=DOUBLE}, #{detail,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      now(), now())
   </insert>
   <insert id="insertSelective" parameterType="com.me.crm.entity.Product" >
     <!--
@@ -146,10 +146,10 @@
         detail = #{detail,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
+        create_time = now(),
       </if>
       <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        update_time = now(),
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -170,4 +170,20 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 自定义SQL -->
+  <!-- 分页展示 -->
+  <select id="pageList" parameterType="Product" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from product 
+    <where>
+    	<if test="name!=null and name!='' ">
+    		and name like '%${name}%'
+    	</if>
+    </where>
+  </select>
+  
+  <!--  -->
+  
 </mapper>

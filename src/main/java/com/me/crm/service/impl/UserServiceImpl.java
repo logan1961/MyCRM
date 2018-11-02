@@ -154,4 +154,9 @@ public class UserServiceImpl implements IUserService {
 		return ServerResponse.createError("登录失败");
 	}
 
+	@Override
+	public List<User> selectXiaoShouUser() {
+		return userMapper.selectXiaoShouUser();
+	}
+
 }

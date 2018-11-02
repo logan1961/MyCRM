@@ -60,4 +60,6 @@ public interface UserMapper {
 	int deleteAll(String[] idArray);
 
 	User login(@Param("name")String name, @Param("password")String password);
+
+	List<User> selectXiaoShouUser();
 }

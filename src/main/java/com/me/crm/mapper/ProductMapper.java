@@ -1,5 +1,7 @@
 package com.me.crm.mapper;
 
+import java.util.List;
+
 import com.me.crm.entity.Product;
 
 public interface ProductMapper {
@@ -50,4 +52,6 @@ public interface ProductMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Product record);
+
+	List<Product> pageList(Product product);
 }

@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.me.crm.common.ServerResponse;
 import com.me.crm.entity.Customer;
+import com.me.crm.entity.Product;
 import com.me.crm.entity.SaleChance;
+import com.me.crm.entity.User;
 import com.me.crm.service.ICustomerService;
+import com.me.crm.service.IProductService;
 import com.me.crm.service.ISaleChanceService;
+import com.me.crm.service.IUserService;
 
 @Controller
 @RequestMapping("/saleChance")
@@ -22,6 +26,10 @@ public class SaleChanceController {
 	private ISaleChanceService saleChanceService;
 	@Autowired
 	private ICustomerService customerService;
+	@Autowired
+	private IProductService productService;
+	@Autowired
+	private IUserService userService;
 	
 	/**
 	 * 获得营销管理界面
@@ -80,6 +88,10 @@ public class SaleChanceController {
 	public String getAddPage(Model model) {
 		List<Customer> customerList = customerService.selectAll();
 		model.addAttribute("customerList", customerList);
+		List<Product> productList = productService.selectAll();
+		model.addAttribute("productList",productList);
+		List<User> userList = userService.selectXiaoShouUser();
+		model.addAttribute("userList",userList);
 		return "/sale_chance/sale_chance_add";
 	}
 	
