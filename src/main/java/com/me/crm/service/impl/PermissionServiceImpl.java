@@ -72,10 +72,15 @@ public class PermissionServiceImpl implements IPermissionService {
 			return ServerResponse.createError("添加失败");
 		}
 	}
-
+	
+	/**
+	 * 查找所有权限
+	 */
 	@Override
 	public ServerResponse selectAllPermisssions() {
+		//pageList没有传递任何参数，相当于查找所有
 		List<Permission> permissions = permissionMapper.pageList(new Permission());
+		//SelectM需要的结构{"id" : 12,"name":"xxx","status":0}
 		List<LayUISelectMVO> list = new ArrayList<>();
 		for (Permission permission : permissions) {
 			LayUISelectMVO layUISelectMVO = new LayUISelectMVO();

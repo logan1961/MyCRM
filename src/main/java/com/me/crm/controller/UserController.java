@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.me.crm.common.ServerResponse;
 import com.me.crm.entity.User;
 import com.me.crm.service.IUserService;
+import com.me.crm.util.UserContext;
 
 @Controller
 @RequestMapping("/user")
@@ -105,5 +106,18 @@ public class UserController {
 	@ResponseBody
 	public ServerResponse login(String name,String password,HttpSession session){
 		return userService.login(name,password,session);
+	}
+	
+	@RequestMapping("/logout")
+	public String logout(HttpSession session){
+		//从session中获取user
+		User user = (User) session.getAttribute(UserContext.USER_IN_SESSION);
+		System.out.println("退出测试user：" + user);
+		if (null != user) {
+			//销毁session
+			session.invalidate();
+			return "/user/login";
+		}
+		return "/index";
 	}
 }

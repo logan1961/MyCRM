@@ -157,6 +157,7 @@
     		and name like '%${name}%'
     	</if>
     </where>
+    order by name
   </select>
   
   <!-- 删除全部 -->

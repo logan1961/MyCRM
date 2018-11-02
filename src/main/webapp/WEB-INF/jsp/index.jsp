@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
 
-    <title> 后台管理系统</title>
+    <title>CRM后台管理系统</title>
 
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -39,7 +39,7 @@
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
                                     <span class="block m-t-xs" style="font-size:20px;">
-                                        <strong style="margin-left:12px" class="font-bold">  后台管理系统</strong>
+                                        <strong style="margin-left:12px" class="font-bold">CRM管理系统</strong>
                                     </span>
                                 </span>
                             </a>
@@ -56,57 +56,77 @@
                             <span class="nav-label">主页</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="J_menuItem" href="${ctx}/getProductPage.action">
-                            <i class="fa fa-desktop"></i>
-                            <span class="nav-label">商品管理</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="${ctx}/getSaleChancePage.action">
-                            <i class="fa fa-desktop"></i>
-                            <span class="nav-label">营销管理</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="J_menuItem" href="${ctx}/getOrderPage.action">
-                            <i class="fa fa-desktop"></i>
-                            <span class="nav-label">订单管理</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa fa-edit"></i>
-                            <span class="nav-label">统计图表</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a class="J_menuItem" href="${ctx}/product/getProductsPage.action">用户管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="${ctx}/user/getUserPage.action">角色管理</a>
-                            <li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa fa-bar-chart-o"></i>
-                            <span class="nav-label">用户&权限管理</span>
-                            <span class="fa arrow"></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a class="J_menuItem" href="${ctx}/user/getUserPage.action">用户管理</a>
-                            </li>
-                            <li>
-                                <a class="J_menuItem" href="${ctx}/role/getRolePage.action">角色管理</a>
-                            <li>
-                            <li>
-                                <a class="J_menuItem" href="${ctx}/permission/getPermissionPage.action">权限管理</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <c:if test="${myFn:checkPermission('spgl:/product/getPrductPage.action')}">
+	                    <li>
+	                        <a class="J_menuItem" href="${ctx}/product/getProductPage.action">
+	                            <i class="fa fa-desktop"></i>
+	                            <span class="nav-label">商品管理</span>
+	                        </a>
+	                    </li>
+                    </c:if>
+                    <c:if test="${myFn:checkPermission('yxgl:/saleChance/getSaleChancePage.action') }">
+	                    <li>
+	                        <a class="J_menuItem" href="${ctx}/SaleChance/getSaleChancePage.action">
+	                            <i class="fa fa-desktop"></i>
+	                            <span class="nav-label">营销管理</span>
+	                        </a>
+	                    </li>
+                    </c:if> 
+                    <c:if test="${myFn:checkPermission('ddgl:/order/getOrderPage.action') }">
+	                    <li>
+	                        <a class="J_menuItem" href="${ctx}/Order/getOrderPage.action">
+	                            <i class="fa fa-desktop"></i>
+	                            <span class="nav-label">订单管理</span>
+	                        </a>
+	                    </li>
+                    </c:if>
+                    <c:if test="${myFn:checkPermission('tjtb')}">
+	                    <li>
+	                        <a href="#">
+	                            <i class="fa fa fa-edit"></i>
+	                            <span class="nav-label">统计图表</span>
+	                            <span class="fa arrow"></span>
+	                        </a>
+	                        <ul class="nav nav-second-level">
+	                        	<c:if test="${myFn:checkPermission('tjtb:/charts/getProductAmount.action')}">
+		                            <li>
+		                                <a class="J_menuItem" href="${ctx}/product/getProductsPage.action">商品数量统计</a>
+		                            </li>
+		                        </c:if>
+		                        <c:if test="${myFn:checkPermission('tjtb:/charts/getProductSale.action')}">
+		                            <li>
+		                                <a class="J_menuItem" href="${ctx}/user/getUserPage.action">商品销量统计</a>
+		                            <li>
+	                        	</c:if>
+	                        </ul>
+	                    </li>
+                    </c:if>
+                    <c:if test="${myFn:checkPermission('yhqx')}">
+	                    <li>
+	                        <a href="#">
+	                            <i class="fa fa fa-bar-chart-o"></i>
+	                            <span class="nav-label">用户&权限管理</span>
+	                            <span class="fa arrow"></span>
+	                        </a>
+	                        <ul class="nav nav-second-level">
+	                        	<c:if test="${myFn:checkPermission('yhqx:/user/getUserPage.action')}">
+	                            	<li>
+		                                <a class="J_menuItem" href="${ctx}/user/getUserPage.action">用户管理</a>
+		                            </li>
+	                        	</c:if>
+	                            <c:if test="${myFn:checkPermission('yhqx:/user/getRolePage.action')}">
+		                            <li>
+		                                <a class="J_menuItem" href="${ctx}/role/getRolePage.action">角色管理</a>
+		                            <li>
+	                            </c:if>
+	                            <c:if test="${myFn:checkPermission('yhqx:/user/getPermissionPage.action')}">
+		                            <li>
+		                                <a class="J_menuItem" href="${ctx}/permission/getPermissionPage.action">权限管理</a>
+		                            </li>
+	                            </c:if>
+	                        </ul>
+	                    </li>
+                    </c:if>
                 </ul>
             </div>
         </nav>

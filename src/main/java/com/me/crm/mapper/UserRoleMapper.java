@@ -1,5 +1,7 @@
 package com.me.crm.mapper;
 
+import java.util.List;
+
 import com.me.crm.entity.UserRole;
 import com.me.crm.entity.UserRoleKey;
 
@@ -53,4 +55,6 @@ public interface UserRoleMapper {
     int updateByPrimaryKey(UserRole record);
 
 	void deleteByUserId(Integer id);
+
+	List<Integer> selectRolesByUserId(Integer userId);
 }

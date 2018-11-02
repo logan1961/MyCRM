@@ -130,12 +130,8 @@ public class UserServiceImpl implements IUserService {
 		}
 		map.put("allRoles", list);
 		//将角色对应的所有角色id的数组放到map中
-		List<Role> userSelectedRoles = roleMapper.selectRoleByUserId(userId);
-		Integer[] selectedRoleIds = new Integer[userSelectedRoles.size()];
-		for (int i = 0; i < userSelectedRoles.size(); i++) {
-			selectedRoleIds[i] = userSelectedRoles.get(i).getId();
-		}
-		map.put("selectIds", selectedRoleIds);
+		List<Integer> userSelectedRoles = userRoleMapper.selectRolesByUserId(userId);
+		map.put("selectIds", userSelectedRoles.toArray());
 		
 		return ServerResponse.createSuccess("成功",map);
 	}
