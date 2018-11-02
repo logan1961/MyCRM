@@ -1,5 +1,7 @@
 package com.me.crm.mapper;
 
+import java.util.List;
+
 import com.me.crm.entity.SaleChance;
 
 public interface SaleChanceMapper {
@@ -50,4 +52,10 @@ public interface SaleChanceMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(SaleChance record);
+
+	List<SaleChance> selectByUserId(Integer id);
+
+	List<SaleChance> pageList(SaleChance saleChance);
+
+	int deleteAll(String[] idArray);
 }

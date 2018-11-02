@@ -1,5 +1,7 @@
 package com.me.crm.mapper;
 
+import java.util.List;
+
 import com.me.crm.entity.Customer;
 
 public interface CustomerMapper {
@@ -50,4 +52,6 @@ public interface CustomerMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Customer record);
+
+	List<Customer> pageList(Customer customer);
 }

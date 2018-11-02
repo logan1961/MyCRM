@@ -113,4 +113,29 @@
     where user_id = #{userId,jdbcType=INTEGER}
       and role_id = #{roleId,jdbcType=INTEGER}
   </update>
+  
+  <!-- 自定义SQL -->
+  <!--  -->
+  <delete id="deleteByUserId" parameterType="int">
+  	delete from user_role
+  	where user_id=#{id}
+  </delete>
+  
+  <!--  -->
+   <select id="selectRolesByUserId" parameterType="int" resultType="int">
+  	select role_id
+  	from user_role
+  	where user_id=#{id}
+  </select>
+  
+   <select id="selectXiaoShouRoleCountByUserId" parameterType="int" resultType="int">
+  	SELECT
+	  COUNT(*)
+	FROM user_role
+	WHERE user_id =#{id} 
+	    AND role_id = (SELECT
+	                     id
+	                   FROM role
+	                   WHERE sn = 'xiaoshou')
+  </select>
 </mapper>

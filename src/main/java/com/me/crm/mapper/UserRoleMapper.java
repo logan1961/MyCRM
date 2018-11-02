@@ -57,4 +57,6 @@ public interface UserRoleMapper {
 	void deleteByUserId(Integer id);
 
 	List<Integer> selectRolesByUserId(Integer userId);
+
+	Integer selectXiaoShouRoleCountByUserId(Integer id);
 }

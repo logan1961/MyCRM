@@ -47,6 +47,14 @@
                         <div class="logo-element">logan
                         </div>
                     </li>
+                    <li class="line dk"></li>
+                    <li class="J_menuItem">
+                        <a class="J_menuItem" href="${ctx}/user/logout.action">
+                            <i class="fa"></i>
+                            <span class="nav-label" style="margin-left:0px">用户退出</span>
+                        </a>
+                    </li>
+                    <li class="line dk"></li>
                     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
                         <span class="ng-scope">分类</span>
                     </li>
@@ -66,7 +74,7 @@
                     </c:if>
                     <c:if test="${myFn:checkPermission('yxgl:/saleChance/getSaleChancePage.action') }">
 	                    <li>
-	                        <a class="J_menuItem" href="${ctx}/SaleChance/getSaleChancePage.action">
+	                        <a class="J_menuItem" href="${ctx}/saleChance/getSaleChancePage.action">
 	                            <i class="fa fa-desktop"></i>
 	                            <span class="nav-label">营销管理</span>
 	                        </a>
@@ -74,7 +82,7 @@
                     </c:if> 
                     <c:if test="${myFn:checkPermission('ddgl:/order/getOrderPage.action') }">
 	                    <li>
-	                        <a class="J_menuItem" href="${ctx}/Order/getOrderPage.action">
+	                        <a class="J_menuItem" href="${ctx}/srder/getOrderPage.action">
 	                            <i class="fa fa-desktop"></i>
 	                            <span class="nav-label">订单管理</span>
 	                        </a>

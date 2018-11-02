@@ -148,4 +148,26 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 自定义SQL -->
+  <!--  -->
+  <select id="pageList" parameterType="Customer" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from customer 
+    <where>
+    	<if test="name!=null and name!='' ">
+    		and name like '%${name}%'
+    	</if>
+    </where>
+  </select>
+  
+  <!--  -->
+ <delete id="deleteAll">
+  	delete from customer
+  	where id in
+  	<foreach collection="array" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  </delete>
 </mapper>
