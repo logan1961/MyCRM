@@ -73,7 +73,7 @@ public class UserController {
 	
 	@RequestMapping("/selectUserAndRoles")
 	@ResponseBody
-	public ServerResponse selectAllRoles(Integer userId){
+	public ServerResponse selectUserAndRoles(Integer userId){
 		return userService.selectUserAndRoles(userId);
 	}
 	

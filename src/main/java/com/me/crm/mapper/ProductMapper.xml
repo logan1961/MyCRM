@@ -166,8 +166,8 @@
       price = #{price,jdbcType=REAL},
       stock = #{stock,jdbcType=DOUBLE},
       detail = #{detail,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      create_time = now(),
+      update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
   
@@ -184,6 +184,12 @@
     </where>
   </select>
   
-  <!--  -->
-  
+  <!-- 批量删除 -->
+  <delete id="deleteAll" >
+  	delete from product
+  	where id in
+  	<foreach collection="array" item="id" open="(" close=")" separator=",">
+  		#{id}
+  	</foreach>
+  </delete>  
 </mapper>

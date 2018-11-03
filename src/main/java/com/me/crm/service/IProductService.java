@@ -17,4 +17,8 @@ public interface IProductService {
 
 	Product findById(Integer productId);
 
+	ServerResponse deleteById(Integer id);
+
+	ServerResponse deleteAll(String ids);
+
 }

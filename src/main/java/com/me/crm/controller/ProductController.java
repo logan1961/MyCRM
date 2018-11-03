@@ -2,7 +2,6 @@ package com.me.crm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -65,5 +64,18 @@ public class ProductController {
 	@ResponseBody
 	public Product findById(Integer productId){
 		return productService.findById(productId);
+	}
+	
+	@RequestMapping("/deleteById")
+	@ResponseBody
+	public ServerResponse deleteById(Integer id){
+		System.out.println("测试productId" + id);
+		return productService.deleteById(id);
+	}
+	
+	@RequestMapping("/deleteAll")
+	@ResponseBody
+	public ServerResponse deleteAll(String ids){
+		return productService.deleteAll(ids);
 	}
 }

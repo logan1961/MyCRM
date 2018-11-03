@@ -81,11 +81,10 @@
 		  	$.ajax({
 		  		url : '${ctx}/product/findById.action',
 		  		type : 'POST',
-		  		data : {"productId" : "${param.id}"},
+		  		data : {"productId" : "${param.productId}"},
 		  		dataType : 'json',
 		  		success : function(resp){
 		  			if(resp.code == util.SUCCESS) {
-						mylayer.success(resp.msg);
 						var product = resp.data["product"];
 						$("#id").val(product.id);
 						$("#name").val(product.name);
@@ -94,7 +93,6 @@
 						$("#stock").val(product.stock);
 						$("#image").val('/pic/' + product.image);
 						$("#editor_id").val(product.detail);
-	
 		  			} else {
 						mylayer.errorMsg(resp.msg);
 					}
@@ -131,14 +129,14 @@
 		//ajax方式提交form表单
 		function submitForm(){
 			$.ajax({
-				url : '${ctx}/product/add.action',
+				url : '${ctx}/product/update.action',
 				data : $('#form_add').serialize(),
 				type : 'POST',
 				dataType : 'json',
 				success : function(resp) {
 					if(resp.code == util.SUCCESS) {
 						//mylayer.success(jsonObj.msg);
-						mylayer.confirm("添加成功，是否跳转到产品列表界面？", "${ctx}/product/getProductPage.action");
+						mylayer.confirm("修改成功，是否跳转到产品列表界面？", "${ctx}/product/getProductPage.action");
 					} else {
 						mylayer.errorMsg(resp.msg);
 					}

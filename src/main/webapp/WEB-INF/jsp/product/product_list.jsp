@@ -82,12 +82,13 @@
 		  table.on('tool(tableFilter)', function(obj){
 		    var data = obj.data;//获得当前行数据,json格式对象
 		    var layEvent = obj.event;//获得lay-event对应的值
+		    console.log(data.id);
 		    if(layEvent === 'detail'){
 		      layer.msg('ID：'+ data.id + ' 的查看操作');
 		    } else if(layEvent === 'del'){
 		      layer.confirm('真的删除行么', function(index){
 		    	$.ajax({
-		    		url:"${ctx}/user/deleteById.action",
+		    		url:"${ctx}/product/deleteById.action",
 		    		data:{"id":data.id},
 		    		dataType:"json",
 		    		success:function(resp) {
@@ -102,7 +103,7 @@
 		    	});
 		      });
 		    } else if(obj.event === 'edit'){
-		    	location.href = "${ctx}/product/getUpdatePage.action?userId="+data.id;
+		    	location.href = "${ctx}/product/getUpdatePage.action?productId=" + data.id;
 		    }
 		  });
 		  

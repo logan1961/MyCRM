@@ -62,7 +62,32 @@ public class ProductServiceImpl implements IProductService {
 
 	@Override
 	public Product findById(Integer productId) {
+		System.out.println("测试id：" + productId);
 		Product product = productMapper.selectByPrimaryKey(productId);
+		System.out.println("测试product：" + product);
 		return product;
+	}
+
+	@Override
+	public ServerResponse deleteById(Integer id) {
+		try {
+			int count = productMapper.deleteByPrimaryKey(id);
+			if (count == 1) {
+				return ServerResponse.createSuccess("删除成功");
+			}
+		} catch (Exception e) {
+			return ServerResponse.createError("删除失败");
+		}
+		return ServerResponse.createError("删除失败");
+	}
+
+	@Override
+	public ServerResponse deleteAll(String ids) {
+		String[] idArray = ids.split(",");
+		int count = productMapper.deleteAll(idArray);
+		if (count == idArray.length) {
+			return ServerResponse.createSuccess("删除成功");
+		}
+		return ServerResponse.createError("删除失败");
 	}
 }

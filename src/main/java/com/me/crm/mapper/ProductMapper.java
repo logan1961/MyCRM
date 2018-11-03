@@ -54,4 +54,6 @@ public interface ProductMapper {
     int updateByPrimaryKey(Product record);
 
 	List<Product> pageList(Product product);
+
+	int deleteAll(String[] idArray);
 }
