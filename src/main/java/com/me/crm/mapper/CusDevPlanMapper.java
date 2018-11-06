@@ -1,5 +1,9 @@
 package com.me.crm.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.me.crm.entity.CusDevPlan;
 
 public interface CusDevPlanMapper {
@@ -50,4 +54,6 @@ public interface CusDevPlanMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(CusDevPlan record);
+
+	List<CusDevPlan> pageList(@Param("cusDevPlan")CusDevPlan cusDevPlan, @Param("saleChanceId")Integer saleChanceId);
 }

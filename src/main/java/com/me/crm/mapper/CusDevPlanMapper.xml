@@ -50,8 +50,8 @@
       plan_date, exe_affect, create_time, 
       update_time)
     values (#{id,jdbcType=INTEGER}, #{saleChanceId,jdbcType=INTEGER}, #{planItem,jdbcType=VARCHAR}, 
-      #{planDate,jdbcType=DATE}, #{exeAffect,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{planDate,jdbcType=DATE}, #{exeAffect,jdbcType=VARCHAR}, now(), 
+      now())
   </insert>
   <insert id="insertSelective" parameterType="com.me.crm.entity.CusDevPlan" >
     <!--
@@ -148,4 +148,13 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <!-- 自定义SQL -->
+  <!-- 分页查询 -->
+  <select id="pageList" resultMap="BaseResultMap">
+  	select
+  	<include refid="Base_Column_List"/>
+  	from cus_dev_plan
+	where sale_chance_id = #{saleChanceId}  		
+  </select>
 </mapper>

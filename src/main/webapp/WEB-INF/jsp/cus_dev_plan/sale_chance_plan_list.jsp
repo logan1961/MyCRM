@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="demoTable">
-	    销售来源：
+	    销售机会ID：
 	  <div class="layui-inline">
 		  <input class="layui-input" id="searchChanceSource" />
 	  </div>
@@ -62,19 +62,18 @@
 			
 			table.render({
 			    elem: '#tableId'
-			    ,url: '${ctx}/saleChance/pageList.action' //数据接口
+			    ,url: '${ctx}/cusDevPlan/pageList.action?saleChanceId=${saleChanceId}'//数据接口
 			    ,page: true //开启分页
 			    ,id : "layUITableId" //设定容器唯一ID，id值是对表格的数据操作方法上是必要的传递条件，它是表格容器的索引
 			    ,cols: [[ //表头
 			      {type: 'checkbox', fixed: 'left'}
 			      ,{field: 'id', title: 'ID'}
-			      ,{field: 'chanceSource', title: '机会来源'}
-			      ,{field: 'customerId', title: '客户id'}
-			      ,{field: 'productId', title: '产品id'}
-			      ,{field: 'userId', title: '营销人员id'}
-			      ,{field: 'successRate', title: '成功几率'}
-			      ,{field: 'status', title: '分配状态'}
-			      ,{field: 'devResult', title: '客户开发状态'}
+			      ,{field: 'saleChanceId', title: '销售机会ID'}
+			      ,{field: 'planItem', title: '计划项'}
+			      ,{field: 'planDate', title: '计划日期'}
+			      ,{field: 'exeAffect', title: '执行效果'}
+			      ,{field: 'createTime', title: '创建时间'}
+			      ,{field: 'updateTime', title: '更新时间'}
 			      ,{fixed:'right', width: 178, toolbar:'#barDemo'}
 			    ]]
 			  });
@@ -84,9 +83,8 @@
 		  table.on('tool(tableFilter)', function(obj){
 		    var data = obj.data;//获得当前行数据,json格式对象
 		    var layEvent = obj.event;//获得lay-event对应的值
-		    
 		    if(layEvent === 'detail'){
-		    	console.log(data.id);
+		    	console.log(data);
 		    	location.href = "${ctx}/cusDevPlan/getSaleChancePlanPage.action?saleChanceId="+data.id ;
 		    } else if(layEvent === 'del'){
 		      layer.confirm('真的删除行么', function(index){
@@ -152,7 +150,14 @@
 			},
 			//添加
 			add : function() {
-				location.href = "${ctx}/saleChance/getAddPage.action";
+				layer.open({
+					type : 2,
+					title : "添加计划项",
+					area : ["400px","390px"],
+					offset : "40px", //定义top坐标，左右居中
+					//弹出框里面的内容，转发(拿到Insert的页面)
+					content : "${ctx}/cusDevPlan/getAddPage.action?saleChanceId=${saleChanceId}"
+				})
 			}
 		  };
 		  

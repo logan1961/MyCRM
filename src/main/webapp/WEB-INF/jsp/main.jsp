@@ -10,6 +10,12 @@
 <body>
 	<h2>欢迎使用后台管理系统</h2>
 	<h3>当前登录用户:</h3>
-	<a href="${ctx}/user/logout.action">退出</a>
+	<a href="${ctx}/user/logout.action"><input type="button" value="退出" onclick="logout()"/></a>
 </body>
+<script type="text/javascript">
+	function logout(){
+		location.href="${ctx}/user/logout.action";
+		window.location.reload();
+	}
+</script>
 </html>
