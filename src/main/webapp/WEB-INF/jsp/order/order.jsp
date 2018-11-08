@@ -88,7 +88,7 @@
 		    } else if(layEvent === 'del'){
 		      layer.confirm('真的删除行么', function(index){
 		    	$.ajax({
-		    		url:"${ctx}/user/deleteById.action",
+		    		url:"${ctx}/order/deleteById.action",
 		    		data:{"id":data.id},
 		    		dataType:"json",
 		    		success:function(resp) {

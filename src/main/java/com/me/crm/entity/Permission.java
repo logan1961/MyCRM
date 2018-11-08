@@ -2,6 +2,10 @@ package com.me.crm.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Permission {
 	
 	private Integer id;
@@ -9,9 +13,11 @@ public class Permission {
     private String name;
 
     private String resource;
-
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date createTime;
-
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date updateTime;
 
     public Permission(Integer id, String name, String resource, Date createTime, Date updateTime) {
@@ -49,7 +55,8 @@ public class Permission {
     public void setResource(String resource) {
         this.resource = resource == null ? null : resource.trim();
     }
-
+    
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss" , timezone = "GMT+08")
     public Date getCreateTime() {
         return createTime;
     }
@@ -57,7 +64,8 @@ public class Permission {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-
+    
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss" , timezone = "GMT+08")
     public Date getUpdateTime() {
         return updateTime;
     }

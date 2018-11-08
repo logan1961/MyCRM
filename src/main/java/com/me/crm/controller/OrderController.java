@@ -36,4 +36,14 @@ public class OrderController {
 		return serverResponse;
 	}
 	
+	/**
+	 * 根据id删除
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/deleteById")
+	@ResponseBody
+	public ServerResponse deleteById(Integer id){
+		return orderService.deleteById(id);
+	}
 }

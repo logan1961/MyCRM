@@ -9,4 +9,6 @@ public interface IOrderService {
 
 	ServerResponse insert(Order order);
 
+	ServerResponse deleteById(Integer id);
+
 }
