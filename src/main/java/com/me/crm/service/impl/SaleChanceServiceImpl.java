@@ -101,4 +101,9 @@ public class SaleChanceServiceImpl implements ISaleChanceService {
 		}
 	}
 
+	@Override
+	public SaleChance selectById(Integer saleChanceId) {
+		return saleChanceMapper.selectByPrimaryKey(saleChanceId);
+	}
+
 }

@@ -100,7 +100,7 @@
 				success : function(resp) {
 					if(resp.code == util.SUCCESS) {
 						//mylayer.success(jsonObj.msg);
-						mylayer.confirm("添加成功，是够跳转到商品列表界面？", "${ctx}/product/getProductPage.action");
+						mylayer.confirm("添加成功，是够跳转到商品列表界面？", "${ctx}/saleChance/getSaleChancePage.action");
 					} else {
 						mylayer.errorMsg(resp.msg);
 					}

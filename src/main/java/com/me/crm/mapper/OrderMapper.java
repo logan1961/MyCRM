@@ -1,5 +1,7 @@
 package com.me.crm.mapper;
 
+import java.util.List;
+
 import com.me.crm.entity.Order;
 
 public interface OrderMapper {
@@ -50,4 +52,6 @@ public interface OrderMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Order record);
+
+	List<Order> pageList();
 }

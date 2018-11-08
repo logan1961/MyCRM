@@ -10,29 +10,26 @@
 </head>
 <body>
 	<div class="demoTable">
-	    销售机会ID：
+	    名字：
 	  <div class="layui-inline">
-		  <input class="layui-input" id="searchChanceSource" />
+		  <input class="layui-input" id="searchName" />
 	  </div>
-	    客户开发状态：
+	    副标题：
 	  <div class="layui-inline">
-		  <select id="searchDevResult">
-		  	<option value="">--开发状态--</option>
-		  	<option value="0">未开发 </option>
-		  	<option value="1">开发中</option>
-		  	<option value="2">开发成功</option>
-		  	<option value="3">开发失败</option>
-		  </select>
+		  <input class="layui-input" id="searchSubtitle" />
+	  </div>
+	   时间：
+	  <div class="layui-inline">
+		  <input class="layui-input" id="searchTime" />
 	  </div>
 	  <button class="layui-btn" data-type="search">搜索</button>
 	  <button class="layui-btn" data-type="deleteAll">批量删除</button>
 	  <button class="layui-btn" data-type="add">添加</button>
-	  <button class="layui-btn" data-type="succ">开发成功</button>
-	  <button class="layui-btn" data-type="fail">开发失败</button>
 	</div>
 	<table id="tableId" lay-filter="tableFilter"></table>
 
 	<script type="text/html" id="barDemo">
+  		<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
   		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 	</script>
@@ -63,18 +60,20 @@
 			
 			table.render({
 			    elem: '#tableId'
-			    ,url: '${ctx}/cusDevPlan/pageList.action?saleChanceId=${saleChanceId}'//数据接口
+			    ,url: '${ctx}/order/pageList.action' //数据接口
 			    ,page: true //开启分页
 			    ,id : "layUITableId" //设定容器唯一ID，id值是对表格的数据操作方法上是必要的传递条件，它是表格容器的索引
 			    ,cols: [[ //表头
 			      {type: 'checkbox', fixed: 'left'}
-			      ,{field: 'id', title: 'ID'}
-			      ,{field: 'saleChanceId', title: '销售机会ID'}
-			      ,{field: 'planItem', title: '计划项'}
-			      ,{field: 'planDate', title: '计划日期'}
-			      ,{field: 'exeAffect', title: '执行效果'}
-			      ,{field: 'createTime', title: '创建时间'}
-			      ,{field: 'updateTime', title: '更新时间'}
+			      ,{field: 'id', title: 'ID', sort: true, fixed: 'left'}
+			      ,{field: 'customerId', title: '所属客户ID', sort: true, fixed: 'left'}
+			      ,{field: 'orderNo', title: '订单号', sort: true, fixed: 'left'}
+			      ,{field: 'saleChanceId', title: '营销机会ID', sort: true, fixed: 'left'}
+			      ,{field: 'orderDate', title: '订单日期', sort: true, fixed: 'left'}
+			      ,{field: 'status', title: '状态', sort: true, fixed: 'left'}
+			      ,{field: 'productId', title: '产品表ID', sort: true}
+			      ,{field: 'createTime', title: '创建时间', sort: true}
+			      ,{field: 'updateTime', title: '更新时间', sort: true}
 			      ,{fixed:'right', width: 178, toolbar:'#barDemo'}
 			    ]]
 			  });
@@ -84,10 +83,12 @@
 		  table.on('tool(tableFilter)', function(obj){
 		    var data = obj.data;//获得当前行数据,json格式对象
 		    var layEvent = obj.event;//获得lay-event对应的值
-		    if(layEvent === ''){
+		    if(layEvent === 'detail'){
+		      layer.msg('ID：'+ data.id + ' 的查看操作');
+		    } else if(layEvent === 'del'){
 		      layer.confirm('真的删除行么', function(index){
 		    	$.ajax({
-		    		url:"${ctx}/saleChance/deleteById.action",
+		    		url:"${ctx}/user/deleteById.action",
 		    		data:{"id":data.id},
 		    		dataType:"json",
 		    		success:function(resp) {
@@ -102,9 +103,7 @@
 		    	});
 		      });
 		    } else if(obj.event === 'edit'){
-		        layer.alert('编辑行：<br>'+ JSON.stringify(data))
-		        console.log(data);
-		    	location.href = "${ctx}/saleChance/getUpdatePage.action?saleChanceId="+data.id;
+		    	location.href = "${ctx}/user/getUpdatePage.action?userId="+data.id;
 		    }
 		  });
 		  
@@ -119,7 +118,7 @@
 		       console.log(ids);
 		       layer.confirm('真的删除行么', function(index){
 			    	$.ajax({
-			    		url:"${ctx}/saleChance/deleteAll.action",
+			    		url:"${ctx}/user/deleteAll.action",
 			    		data:{"ids":ids},
 			    		dataType:"json",
 			    		success:function(resp) {
@@ -138,8 +137,9 @@
 			search : function() {
 				table.reload('layUITableId', {
 				  where: { //设定异步数据接口的额外参数，任意设
-					  chanceSource:$("#searchChanceSource").val(),
-					  devResult:$("#searchDevResult").val()
+					  name:$("#searchName").val(),
+					  subtitle:$("#searchSubtitle").val(),
+					  time:$("#searchTime").val()
 				  }
 				  ,page: {
 				    curr: 1 //重新从第 1 页开始
@@ -148,33 +148,7 @@
 			},
 			//添加
 			add : function() {
-				layer.open({
-					type : 2,
-					title : "添加计划项",
-					area : ["400px","390px"],
-					offset : "40px", //定义top坐标，左右居中
-					//弹出框里面的内容，转发(拿到Insert的页面)
-					content : "${ctx}/cusDevPlan/getAddPage.action?saleChanceId=${saleChanceId}"
-				})
-			},
-			//开发成功
-			succ : function() {
-				$.ajax({
-		    		url:"${ctx}/saleChance/selectById.action",
-		    		data:{"saleChanceId":"${saleChanceId}"},
-		    		dataType:"json",
-		    		success:function(resp) {
-		    			if(resp.code == util.SUCCESS){
-		    				mylayer.successUrl("订单生成成功","${ctx}/order/getOrderPage.action");
-		    			} else {
-		    				mylayer.errorMsg(resp.msg);
-		    			}
-		    		}
-			    	});
-			},
-			//开发失败
-			fail : function() {
-				location.href = "${ctx}/saleChance/getUpdatePage.action?saleChanceId";
+				location.href = "${ctx}/order/getAddPage.action";
 			}
 		  };
 		  

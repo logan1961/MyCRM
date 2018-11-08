@@ -82,7 +82,7 @@
                     </c:if> 
                     <c:if test="${myFn:checkPermission('ddgl:/order/getOrderPage.action') }">
 	                    <li>
-	                        <a class="J_menuItem" href="${ctx}/srder/getOrderPage.action">
+	                        <a class="J_menuItem" href="${ctx}/order/getOrderPage.action">
 	                            <i class="fa fa-desktop"></i>
 	                            <span class="nav-label">订单管理</span>
 	                        </a>

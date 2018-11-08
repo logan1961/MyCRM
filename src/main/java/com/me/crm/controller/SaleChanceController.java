@@ -1,8 +1,10 @@
 package com.me.crm.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.xmlbeans.impl.xb.xsdschema.impl.PublicImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.me.crm.common.ServerResponse;
 import com.me.crm.entity.Customer;
+import com.me.crm.entity.Order;
 import com.me.crm.entity.Product;
 import com.me.crm.entity.SaleChance;
 import com.me.crm.entity.User;
 import com.me.crm.service.ICustomerService;
+import com.me.crm.service.IOrderService;
 import com.me.crm.service.IProductService;
 import com.me.crm.service.ISaleChanceService;
 import com.me.crm.service.IUserService;
@@ -30,6 +34,8 @@ public class SaleChanceController {
 	private IProductService productService;
 	@Autowired
 	private IUserService userService;
+	@Autowired
+	private IOrderService orderService;
 	
 	/**
 	 * 获得营销管理界面
@@ -128,4 +134,34 @@ public class SaleChanceController {
 		return saleChanceService.update(saleChance);
 	}
 	
+	@RequestMapping("/selectById")
+	@ResponseBody
+	public ServerResponse selectById(Integer saleChanceId){
+		//查出sale_chance表的信息
+		SaleChance saleChance = saleChanceService.selectById(saleChanceId);
+		System.out.println("测试saleChance：" + saleChance);
+		
+		//填充order表
+		Order order = new Order();
+		order.setCustomerId(saleChance.getCustomerId());//客户ID
+		
+		//生成时间的订单号
+		Date date = new Date();
+		SimpleDateFormat toOrderNo = new SimpleDateFormat("yyyyMMddhhmmss");
+		String orderNo = toOrderNo.format(date);
+		order.setOrderNo(orderNo);//订单号
+		order.setSaleChanceId(saleChance.getId());//机会id
+		
+		//订购日期
+		order.setOrderDate(date);//订购日期
+		order.setStatus(1);//回款
+		order.setProductId(saleChance.getProductId());//产品id
+		
+		//更改sale_chance表的客户状态,更改为开发成功
+		SaleChance sale = new SaleChance();
+		sale.setDevResult(2);
+		saleChanceService.update(sale);
+		
+		return orderService.insert(order);
+	}
 }

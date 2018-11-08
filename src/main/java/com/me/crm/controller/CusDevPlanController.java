@@ -17,7 +17,7 @@ public class CusDevPlanController {
 	private ICusDevPlanService cusDevPlanService;
 	
 	/**
-	 * 分页
+	 * 分页展示
 	 * @param page
 	 * @param limit
 	 * @param cusDevPlan
@@ -64,4 +64,5 @@ public class CusDevPlanController {
 		System.out.println("测试CusDevPlan内容：" + cusDevPlan);
 		return cusDevPlanService.addSaleChancePlan(cusDevPlan);
 	}
+	
 }
