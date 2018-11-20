@@ -151,7 +151,7 @@
 				layer.open({
 					type : 2,
 					title : "添加计划项",
-					area : ["400px","390px"],
+					area : ["1080px","250px"],
 					offset : "40px", //定义top坐标，左右居中
 					//弹出框里面的内容，转发(拿到Insert的页面)
 					content : "${ctx}/cusDevPlan/getAddPage.action?saleChanceId=${saleChanceId}"
@@ -174,7 +174,18 @@
 			},
 			//开发失败
 			fail : function() {
-				location.href = "${ctx}/saleChance/getUpdatePage.action?saleChanceId";
+				$.ajax({
+					url:"${ctx}/saleChance/fail.action" ,
+					data:{"saleChanceId":"${saleChanceId}"},
+					dataType:"json",
+					success:function(resp) {
+						if(resp.code == util.SUCCESS) {
+							mylayer.successUrl("开发失败","${ctx}/cusDevPlan/getSaleChancePlanPage.action?saleChanceId=${saleChanceId}")
+						} else {
+							mylayer.errorMsg(resp.msg);
+						}
+					}
+				})
 			}
 		  };
 		  

@@ -121,6 +121,13 @@ public class SaleChanceController {
 	public String getUpdatePage(Integer saleChanceId,Model model) {
 		SaleChance saleChance = saleChanceService.selectById(saleChanceId);
 		model.addAttribute("saleChance",saleChance);
+		
+		List<Customer> customers = customerService.selectAll();
+		List<Product> products = productService.selectAll();
+		List<User> users = userService.selectXiaoShouUser();
+		model.addAttribute("customers",customers);
+		model.addAttribute("product",products);
+		model.addAttribute("user",users);
 		return "/sale_chance/sale_chance_update";
 	}
 	
@@ -165,5 +172,21 @@ public class SaleChanceController {
 		saleChanceService.update(sale);
 		
 		return orderService.insert(order);
+	}
+	
+	/**
+	 * 开发失败
+	 * @param saleChanceId
+	 * @return
+	 */
+	@RequestMapping("/fail")
+	@ResponseBody
+	public ServerResponse fail(Integer saleChanceId) {
+		//查出开发机会的信息
+		SaleChance saleChance = saleChanceService.selectById(saleChanceId);
+		//设置开发状态为开发失败--3
+		saleChance.setDevResult(3);
+		//修改状态更新完的saleChance
+		return saleChanceService.update(saleChance);
 	}
 }

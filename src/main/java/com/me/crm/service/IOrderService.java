@@ -11,4 +11,6 @@ public interface IOrderService {
 
 	ServerResponse deleteById(Integer id);
 
+	Order findById(Integer id);
+
 }

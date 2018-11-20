@@ -51,5 +51,11 @@ public class OrderServiceImpl implements IOrderService {
 			return ServerResponse.createError("删除失败");
 		}
 	}
+
+	@Override
+	public Order findById(Integer id) {
+		Order order = orderMapper.selectByPrimaryKey(id);
+		return order;
+	}
 	
 }

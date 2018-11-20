@@ -2,10 +2,12 @@ package com.me.crm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.me.crm.common.ServerResponse;
+import com.me.crm.entity.Order;
 import com.me.crm.service.IOrderService;
 
 @Controller
@@ -45,5 +47,16 @@ public class OrderController {
 	@ResponseBody
 	public ServerResponse deleteById(Integer id){
 		return orderService.deleteById(id);
+	}
+	
+	/**
+	 * 获得订单详情展示页面
+	 * @return
+	 */
+	@RequestMapping("/getOrderDetailPage")
+	public String getOrderDetailPage(Integer id,Model model) {
+		Order order = orderService.findById(id);
+		model.addAttribute("order",order);
+		return "/order/order_detail";
 	}
 }

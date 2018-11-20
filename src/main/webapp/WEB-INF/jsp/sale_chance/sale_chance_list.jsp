@@ -37,10 +37,21 @@
 	</script>
 	<script type="text/html" id="statusTpl">
 		 {{#  if(d.status == 1){  }}
-		 	           上架
+		 	           已分配
 		 {{#  } else {            }}
-				  下架
+				  未分配
 		 {{#  }					  }}
+	</script>
+	<script type="text/html" id="statusTp2">
+		 {{#  if(d.devResult == 1){          }}
+		 	           开发中
+		 {{#  } else if (d.devResult == 2){  }}
+				  开发成功
+		 {{#  } else if (d.devResult == 3){  }}
+				  开发失败
+		 {{#  } else if (d.devResult == 0){  }}
+				  未开发
+		 {{#  }					  			 }}
 	</script>
 	<script type="text/html" id="mainImageTpl">
 		 <img src="{{d.fullUrl}}"/>
@@ -73,8 +84,8 @@
 			      ,{field: 'productId', title: '产品id'}
 			      ,{field: 'userId', title: '营销人员id'}
 			      ,{field: 'successRate', title: '成功几率'}
-			      ,{field: 'status', title: '分配状态'}
-			      ,{field: 'devResult', title: '客户开发状态'}
+			      ,{field: 'status', title: '分配状态',templet:"#statusTpl"}
+			      ,{field: 'devResult', title: '客户开发状态',templet:"#statusTp2"}
 			      ,{fixed:'right', width: 178, toolbar:'#barDemo'}
 			    ]]
 			  });

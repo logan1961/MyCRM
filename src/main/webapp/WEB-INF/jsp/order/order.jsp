@@ -34,10 +34,10 @@
   		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 	</script>
 	<script type="text/html" id="statusTpl">
-		 {{#  if(d.status == 1){  }}
-		 	           上架
+		 {{#  if(d.status == 0){  }}
+		 	           未回款
 		 {{#  } else {            }}
-				  下架
+				  已回款
 		 {{#  }					  }}
 	</script>
 	<script type="text/html" id="mainImageTpl">
@@ -70,7 +70,7 @@
 			      ,{field: 'orderNo', title: '订单号', sort: true, fixed: 'left'}
 			      ,{field: 'saleChanceId', title: '营销机会ID', sort: true, fixed: 'left'}
 			      ,{field: 'orderDate', title: '订单日期', sort: true, fixed: 'left'}
-			      ,{field: 'status', title: '状态', sort: true, fixed: 'left'}
+			      ,{field: 'status', title: '状态', sort: true, fixed: 'left',templet:"#statusTpl"}
 			      ,{field: 'productId', title: '产品表ID', sort: true}
 			      ,{field: 'createTime', title: '创建时间', sort: true}
 			      ,{field: 'updateTime', title: '更新时间', sort: true}
@@ -84,7 +84,15 @@
 		    var data = obj.data;//获得当前行数据,json格式对象
 		    var layEvent = obj.event;//获得lay-event对应的值
 		    if(layEvent === 'detail'){
-		      layer.msg('ID：'+ data.id + ' 的查看操作');
+		    	
+		    	layer.open({
+					type : 2,
+					title : "订单详情",
+					area : ["1080px","300px"],
+					offset : "40px", //定义top坐标，左右居中
+					//弹出框里面的内容，转发(拿到Insert的页面)
+					content : "${ctx}/order/getOrderDetailPage.action?id=" + data.id
+				})
 		    } else if(layEvent === 'del'){
 		      layer.confirm('真的删除行么', function(index){
 		    	$.ajax({
