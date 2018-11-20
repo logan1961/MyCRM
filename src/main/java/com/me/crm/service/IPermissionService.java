@@ -15,4 +15,8 @@ public interface IPermissionService {
 
 	ServerResponse selectAllPermisssions();
 
+	ServerResponse update(Permission permission);
+
+	ServerResponse findPermissionById(Integer id);
+
 }

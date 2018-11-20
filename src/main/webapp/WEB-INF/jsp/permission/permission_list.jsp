@@ -99,7 +99,7 @@
 		    	});
 		      });
 		    } else if(obj.event === 'edit'){
-		      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+				location.href = "${ctx}/permission/getUpdatePage.action?id=" + data.id;
 		    }
 		  });
 		  

@@ -99,7 +99,6 @@
 		    	});
 		      });
 		    } else if(obj.event === 'edit'){
-		       //layer.alert('编辑行：<br>'+ JSON.stringify(data))
 		       location.href = "${ctx}/role/getUpdatePage.action?roleId="+data.id;
 		    }
 		  });

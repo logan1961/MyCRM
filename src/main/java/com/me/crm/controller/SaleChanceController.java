@@ -118,8 +118,10 @@ public class SaleChanceController {
 	 * @return
 	 */
 	@RequestMapping("/getUpdatePage")
-	public String getUpdatePage() {
-		return "/saleChance/saleChance_update";
+	public String getUpdatePage(Integer saleChanceId,Model model) {
+		SaleChance saleChance = saleChanceService.selectById(saleChanceId);
+		model.addAttribute("saleChance",saleChance);
+		return "/sale_chance/sale_chance_update";
 	}
 	
 	/**

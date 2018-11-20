@@ -15,10 +15,12 @@ public interface IProductService {
 
 	ServerResponse update(Product product);
 
-	Product findById(Integer productId);
+	Product findById(Integer id);
 
 	ServerResponse deleteById(Integer id);
 
 	ServerResponse deleteAll(String ids);
+
+	ServerResponse getProductCount();
 
 }

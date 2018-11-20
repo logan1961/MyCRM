@@ -18,21 +18,17 @@
 		<form id="form_add" onsubmit="return false" class="layui-form layui-form-pane" action="">
 			<input id="id" type="hidden" name="id"/>
 		  <div class="layui-form-item">
-		    <label class="layui-form-label">角色名称</label>
+		    <label class="layui-form-label">权限名称</label>
 		    <div class="layui-input-block">
-		      <input type="text" id="name" name="name" autocomplete="off" placeholder="请输入标题" class="layui-input">
+		      <input type="text" id="name" name="name" autocomplete="off" placeholder="请输入" class="layui-input">
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
-		    <label class="layui-form-label">角色编号</label>
+		    <label class="layui-form-label">资源</label>
 		    <div class="layui-input-block">
-		      <input type="text" id="sn" name="sn" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+		      <input type="text" id="resource" name="resource" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
 		    </div>
 		  </div>
-		  <div class="layui-form-item">
-			<label class="layui-form-label">权限</label>
-			<div class="layui-input-block" id="permissions" name="permissions">
-      	  </div>
 		  <input type="button" class="layui-btn" onclick="submitForm()" value="提交"/>
 		</form>
 	</div>
@@ -50,39 +46,26 @@
 		    base : '${ctx}/static/lib/'
 		  }).extend({
 		    selectM: './layui_extends/selectM'
-		  }).use(['form','upload','selectM'],function(){
+		  }).use(['form'],function(){
 		  	var form = layui.form;
-		  	var upload = layui.upload;
-		  	var selectM = layui.selectM;
 		  	
 		  	$.ajax({
-				url : '${ctx}/role/selectRoleAndPermissions.action',
+				url : '${ctx}/permission/findPermissionById.action',
 				type : 'POST',
-				data : {"roleId" : "${param.roleId}"},
+				data : {"id" : "${param.id}"},
 				dataType : 'json',
 				success : function(resp) {
 					if(resp.code == util.SUCCESS) {
-						mylayer.success(resp.msg);
+						mylayer.success("查找成功");
 						
-						var role = resp.data["role"];
-						var allPermissions = resp.data["allPermissions"];
-						//[6,10,11]
-						var selectIds = resp.data["selectIds"];
-						$("#id").val(role.id);
-						$("#name").val(role.name);
-						$("#sn").val(role.sn);
+						var id = resp.data["id"];
+						var name = resp.data["name"];
+						var resource = resp.data["resource"];
 						
-						 //多选标签-基本配置
-					    var tagIns = selectM({
-					      //元素容器【必填】
-					      elem: '#permissions'
-					      //候选数据【必填】
-					      ,data: allPermissions
-					      //默认值
-					      ,selected: selectIds
-					   	   // 默认最多选中5个
-					      ,max : 100
-					    });
+						$("#id").val(id);
+						$("#name").val(name);
+						$("#resource").val(resource);
+						
 					} else {
 						mylayer.errorMsg(resp.msg);
 					}
@@ -93,14 +76,14 @@
 		//ajax方式提交form表单
 		function submitForm(){
 			$.ajax({
-				url : '${ctx}/role/update.action',
+				url : '${ctx}/permission/update.action',
 				data : $('#form_add').serialize(),
 				type : 'POST',
 				dataType : 'json',
 				success : function(resp) {
 					if(resp.code == util.SUCCESS) {
 						//mylayer.success(jsonObj.msg);
-						mylayer.confirm("添加成功，是够跳转到角色列表界面？", "${ctx}/role/getRolePage.action");
+						mylayer.confirm("修改成功，是否跳转到权限列表界面？", "${ctx}/permission/getPermissionPage.action");
 					} else {
 						mylayer.errorMsg(resp.msg);
 					}

@@ -30,6 +30,14 @@ public class RoleController {
 		return "/role/role_list";
 	}
 	
+	/**
+	 * 分页展示
+	 * @param page
+	 * @param limit
+	 * @param role
+	 * @param time
+	 * @return
+	 */
 	@RequestMapping("/pageList")
 	@ResponseBody
 	public ServerResponse pageList(Integer page, Integer limit, Role role, Date time) {
@@ -37,24 +45,45 @@ public class RoleController {
 		System.out.println(serverResponse);
 		return serverResponse;
 	}
-
+	
+	/**
+	 * 根据id删除角色数据
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/deleteById")
 	@ResponseBody
 	public ServerResponse deleteById(Integer id) {
 		return roleService.deleteById(id);
 	}
-
+	
+	/**
+	 * 批量删除
+	 * @param ids
+	 * @return
+	 */
 	@RequestMapping("/deleteAll")
 	@ResponseBody
 	public ServerResponse deleteAll(String ids) {
 		return roleService.deleteAll(ids);
 	}
-
+	
+	/**
+	 * 获得添加页面
+	 * @return
+	 */
 	@RequestMapping("/getAddPage")
 	public String getAddPage() {
 		return "/role/role_add";
 	}
-
+	
+	/**
+	 * 添加
+	 * @param role
+	 * @param permissions
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/add")
 	@ResponseBody
 	public ServerResponse add(Role role, String permissions, HttpSession session) {
@@ -87,12 +116,23 @@ public class RoleController {
 		return "/role/role_update";
 	}
 	
+	/**
+	 * 查找出角色对应的权限信息
+	 * @param roleId
+	 * @return
+	 */
 	@RequestMapping("/selectRoleAndPermissions")
 	@ResponseBody
 	public ServerResponse selectRoleAndPermissions(Integer roleId){
+		ServerResponse serverResponse = roleService.selectRoleAndPermissions(roleId);
+		System.out.println("测试一下用户的权限信息" + serverResponse.getData());
 		return roleService.selectRoleAndPermissions(roleId);
 	}
 	
+	/**
+	 * 查找所有的角色
+	 * @return
+	 */
 	@RequestMapping("/selectAllRoles")
 	@ResponseBody
 	public ServerResponse selectAllRoles() {

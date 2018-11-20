@@ -61,9 +61,9 @@ public class ProductServiceImpl implements IProductService {
 	}
 
 	@Override
-	public Product findById(Integer productId) {
-		System.out.println("测试id：" + productId);
-		Product product = productMapper.selectByPrimaryKey(productId);
+	public Product findById(Integer id) {
+		System.out.println("测试id：" + id);
+		Product product = productMapper.selectByPrimaryKey(id);
 		System.out.println("测试product：" + product);
 		return product;
 	}
@@ -89,5 +89,11 @@ public class ProductServiceImpl implements IProductService {
 			return ServerResponse.createSuccess("删除成功");
 		}
 		return ServerResponse.createError("删除失败");
+	}
+
+	@Override
+	public ServerResponse getProductCount() {
+		List list = productMapper.getProductCount();
+		return ServerResponse.createSuccess("查询数量成功", list);
 	}
 }

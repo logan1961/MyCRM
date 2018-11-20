@@ -56,4 +56,6 @@ public interface ProductMapper {
 	List<Product> pageList(Product product);
 
 	int deleteAll(String[] idArray);
+
+	List getProductCount();
 }

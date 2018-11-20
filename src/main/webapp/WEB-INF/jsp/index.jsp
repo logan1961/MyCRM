@@ -98,7 +98,7 @@
 	                        <ul class="nav nav-second-level">
 	                        	<c:if test="${myFn:checkPermission('tjtb:/charts/getProductAmount.action')}">
 		                            <li>
-		                                <a class="J_menuItem" href="${ctx}/product/getProductsPage.action">商品数量统计</a>
+		                                <a class="J_menuItem" href="${ctx}/product/getProductChartPage.action">商品数量统计</a>
 		                            </li>
 		                        </c:if>
 		                        <c:if test="${myFn:checkPermission('tjtb:/charts/getProductSale.action')}">

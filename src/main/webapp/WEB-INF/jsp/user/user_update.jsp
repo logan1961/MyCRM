@@ -49,7 +49,7 @@
 		  </div>
 		  <div class="layui-form-item">
 			<label class="layui-form-label">角色</label>
-			<div class="layui-input-block" id="roles" name="roles">
+			<div class="layui-input-block" id="roles" name="roles"></div>
       	  </div>
 		  <input type="button" class="layui-btn" onclick="submitForm()" value="提交"/>
 		</form>
@@ -67,9 +67,8 @@
 		    base : '${ctx}/static/lib/'
 		  }).extend({
 		    selectM: './layui_extends/selectM'
-		  }).use(['form','upload','selectM'],function(){
+		  }).use(['form','selectM'],function(){
 		  	var form = layui.form;
-		  	var upload = layui.upload;
 		  	var selectM = layui.selectM;
 		  	
 		  	$.ajax({

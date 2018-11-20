@@ -106,8 +106,6 @@
 		    	});
 		      });
 		    } else if(obj.event === 'edit'){
-		        layer.alert('编辑行：<br>'+ JSON.stringify(data))
-		        console.log(data);
 		    	location.href = "${ctx}/saleChance/getUpdatePage.action?saleChanceId="+data.id;
 		    }
 		  });

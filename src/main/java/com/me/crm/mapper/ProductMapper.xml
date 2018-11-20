@@ -191,5 +191,11 @@
   	<foreach collection="array" item="id" open="(" close=")" separator=",">
   		#{id}
   	</foreach>
-  </delete>  
+  </delete>
+  
+  <!-- 查询商品对应的数量 -->
+  <select id="getProductCount" resultType="Product">
+  	select name,stock
+  	from product
+  </select>  
 </mapper>

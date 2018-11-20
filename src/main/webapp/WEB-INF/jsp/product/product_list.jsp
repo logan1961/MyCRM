@@ -29,7 +29,6 @@
 	<table id="tableId" lay-filter="tableFilter"></table>
 
 	<script type="text/html" id="barDemo">
-  		<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
   		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 	</script>
@@ -83,9 +82,7 @@
 		    var data = obj.data;//获得当前行数据,json格式对象
 		    var layEvent = obj.event;//获得lay-event对应的值
 		    console.log(data.id);
-		    if(layEvent === 'detail'){
-		      layer.msg('ID：'+ data.id + ' 的查看操作');
-		    } else if(layEvent === 'del'){
+		    if(layEvent === 'del'){
 		      layer.confirm('真的删除行么', function(index){
 		    	$.ajax({
 		    		url:"${ctx}/product/deleteById.action",
@@ -103,7 +100,7 @@
 		    	});
 		      });
 		    } else if(obj.event === 'edit'){
-		    	location.href = "${ctx}/product/getUpdatePage.action?productId=" + data.id;
+		    	location.href = "${ctx}/product/toUpdate.action?id=" + data.id;
 		    }
 		  });
 		  

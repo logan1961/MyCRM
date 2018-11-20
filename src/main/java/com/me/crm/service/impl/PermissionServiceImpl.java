@@ -92,4 +92,21 @@ public class PermissionServiceImpl implements IPermissionService {
 		return ServerResponse.createSuccess("查询所有权限成功",list);
 	}
 
+	@Override
+	public ServerResponse update(Permission permission) {
+		int count = permissionMapper.updateByPrimaryKey(permission);
+		if (count == 1) {
+			return ServerResponse.createSuccess("修改成功");
+		} else {
+			return ServerResponse.createError("修改失败");
+		}
+	}
+
+	@Override
+	public ServerResponse findPermissionById(Integer id) {
+		Permission permission = permissionMapper.selectByPrimaryKey(id);
+		
+		return ServerResponse.createSuccess("查找成功", permission);
+	}
+
 }

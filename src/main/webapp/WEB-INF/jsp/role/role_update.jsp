@@ -31,7 +31,7 @@
 		  </div>
 		  <div class="layui-form-item">
 			<label class="layui-form-label">权限</label>
-			<div class="layui-input-block" id="permissions" name="permissions">
+			<div class="layui-input-block" id="permissions" name="permissions"></div>
       	  </div>
 		  <input type="button" class="layui-btn" onclick="submitForm()" value="提交"/>
 		</form>
@@ -50,9 +50,8 @@
 		    base : '${ctx}/static/lib/'
 		  }).extend({
 		    selectM: './layui_extends/selectM'
-		  }).use(['form','upload','selectM'],function(){
+		  }).use(['form','selectM'],function(){
 		  	var form = layui.form;
-		  	var upload = layui.upload;
 		  	var selectM = layui.selectM;
 		  	
 		  	$.ajax({
@@ -62,7 +61,7 @@
 				dataType : 'json',
 				success : function(resp) {
 					if(resp.code == util.SUCCESS) {
-						mylayer.success(resp.msg);
+						mylayer.success("查找权限成功");
 						
 						var role = resp.data["role"];
 						var allPermissions = resp.data["allPermissions"];
@@ -100,7 +99,7 @@
 				success : function(resp) {
 					if(resp.code == util.SUCCESS) {
 						//mylayer.success(jsonObj.msg);
-						mylayer.confirm("添加成功，是够跳转到角色列表界面？", "${ctx}/role/getRolePage.action");
+						mylayer.confirm("修改成功，是够跳转到角色列表界面？", "${ctx}/role/getRolePage.action");
 					} else {
 						mylayer.errorMsg(resp.msg);
 					}

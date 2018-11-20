@@ -11,7 +11,23 @@
 	<h2>欢迎使用后台管理系统</h2>
 	<h3>当前登录用户:</h3>
 	<a href="${ctx}/user/logout.action"><input type="button" value="退出" onclick="logout()"/></a>
+	<div id="main" style="width: 600px;height:400px;"></div>
 </body>
+<script type="text/javascript" src="${ctx}/static/lib/echarts.min.js"></script>
+<script>
+    // 绘制图表。
+    echarts.init(document.getElementById('main')).setOption({
+        series: {
+            type: 'pie',
+            data: [
+                {name: 'A', value: 1212},
+                {name: 'B', value: 2323},
+                {name: 'C', value: 1919},
+                {}
+            ]
+        }
+    });
+</script>
 <script type="text/javascript">
 	function logout(){
 		location.href="${ctx}/user/logout.action";

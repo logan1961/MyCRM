@@ -16,28 +16,29 @@
 <body>
   	<div class="main_div">
 		<form id="form_add" onsubmit="return false" class="layui-form layui-form-pane" action="">
+			<input id="id" type="hidden" name="id" value="${product.id}"/>
 		  <div class="layui-form-item">
 		    <label class="layui-form-label">产品名称</label>
 		    <div class="layui-input-block">
-		      <input type="text" id="name" name="name" autocomplete="off" placeholder="请输入产品名称" class="layui-input">
+		      <input type="text" id="name" name="name" autocomplete="off" value="${product.name}" class="layui-input">
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
 		    <label class="layui-form-label">单位</label>
 		    <div class="layui-input-block">
-		      <input type="text" id="unit" name="unit" lay-verify="required" placeholder="请输入单位" autocomplete="off" class="layui-input">
+		      <input type="text" id="unit" name="unit" lay-verify="required" value="${product.unit}" autocomplete="off" class="layui-input">
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
 		    <label class="layui-form-label">价格</label>
 		    <div class="layui-input-block">
-		      <input type="text" id="price" name="price" lay-verify="required" placeholder="请输入价格" autocomplete="off" class="layui-input">
+		      <input type="text" id="price" name="price" lay-verify="required" value="${product.price}" autocomplete="off" class="layui-input">
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
 		    <label class="layui-form-label">库存</label>
 		    <div class="layui-input-block">
-		      <input type="text" id="stock" name="stock" lay-verify="required" placeholder="请输入库存" autocomplete="off" class="layui-input">
+		      <input type="text" id="stock" name="stock" lay-verify="required" value="${product.stock}" autocomplete="off" class="layui-input">
 		    </div>
 		  </div>
 		  <div class="layui-form-item">
@@ -47,7 +48,7 @@
 		    <div class="layui-upload">
 			  <button type="button" class="layui-btn" id="uploadImgBtn">上传图片</button>
 			  <div class="layui-upload-list">
-			    <img style="width:200px;height:200px" class="layui-upload-img" id="mainImg">
+			    <img style="width:200px;height:200px" class="layui-upload-img" src="/pic/${product.image}" id="mainImg">
 			    <p id="demoText"></p>
 			  </div>
 			</div>   
@@ -55,7 +56,7 @@
 		  <div class="layui-form-item layui-form-text">
 		    <label class="layui-form-label">详情</label>
 		    <div class="layui-input-block">
-		      <textarea id="editor_id" name="detail" style="height:500px" placeholder="请输入内容" class="layui-textarea"></textarea>
+		      <textarea id="editor_id" name="detail" style="height:500px" placeholder="请输入内容" class="layui-textarea">${product.detail}</textarea>
 		    </div>
 		  </div>
 		  <input type="button" class="layui-btn" onclick="submitForm()" value="修改"/>
@@ -78,26 +79,6 @@
 		  	var form = layui.form;
 		  	var upload = layui.upload;
 		  	
-		  	$.ajax({
-		  		url : '${ctx}/product/findById.action',
-		  		type : 'POST',
-		  		data : {"productId" : "${param.productId}"},
-		  		dataType : 'json',
-		  		success : function(resp){
-		  			if(resp.code == util.SUCCESS) {
-						var product = resp.data["product"];
-						$("#id").val(product.id);
-						$("#name").val(product.name);
-						$("#unit").val(product.unit);
-						$("#price").val(product.price);
-						$("#stock").val(product.stock);
-						$("#image").val('/pic/' + product.image);
-						$("#editor_id").val(product.detail);
-		  			} else {
-						mylayer.errorMsg(resp.msg);
-					}
-		  		}
-		  	});
 		  	
 		  	//上传图片
 	  	 	var uploadInst = upload.render({

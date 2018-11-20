@@ -48,40 +48,77 @@ public class UserController {
 		return serverResponse;
 	}
 	
+	/**
+	 * 根据id删除用户信息
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping("/deleteById")
 	@ResponseBody
 	public ServerResponse deleteById(Integer id){
 		return userService.deleteById(id);
 	}
 	
+	/**
+	 * 批量删除
+	 * @param ids
+	 * @return
+	 */
 	@RequestMapping("/deleteAll")
 	@ResponseBody
 	public ServerResponse deleteAll(String ids){
 		return userService.deleteAll(ids);
 	}
 	
+	/**
+	 * 获得添加界面
+	 * @return
+	 */
 	@RequestMapping("/getAddPage")
 	public String getAddPage(){
 		return "/user/user_add";
 	}
 	
+	/**
+	 * 添加用户信息
+	 * @param user
+	 * @param roles
+	 * @return
+	 */
 	@RequestMapping("/add")
 	@ResponseBody
 	public ServerResponse add(User user,String roles){
 		return userService.add(user,roles);
 	}
 	
+	/**
+	 * 查找用户和角色信息
+	 * @param userId
+	 * @return
+	 */
 	@RequestMapping("/selectUserAndRoles")
 	@ResponseBody
 	public ServerResponse selectUserAndRoles(Integer userId){
+		ServerResponse serverResponse = userService.selectUserAndRoles(userId);
+		System.out.println("测试一下查找用户的角色" + serverResponse.getData());
 		return userService.selectUserAndRoles(userId);
 	}
 	
+	/**
+	 * 获得修改界面
+	 * @return
+	 */
 	@RequestMapping("/getUpdatePage")
 	public String getUpdatePage(){
 		return "/user/user_update";
 	}
 	
+	/**
+	 * 修改信息
+	 * @param user
+	 * @param roles
+	 * @return
+	 */
 	@RequestMapping("/update")
 	@ResponseBody
 	public ServerResponse update(User user, String roles) {
@@ -90,6 +127,10 @@ public class UserController {
 		return userService.update(user, roles);
 	}
 	
+	/**
+	 * 获得登录界面
+	 * @return
+	 */
 	@RequestMapping("/getLoginPage")
 	public String getLoginPage(){
 		return "/user/login";
@@ -108,6 +149,11 @@ public class UserController {
 		return userService.login(name,password,session);
 	}
 	
+	/**
+	 * 用户退出
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/logout")
 	public String logout(HttpSession session){
 		//从session中获取user
